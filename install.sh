@@ -4,8 +4,8 @@
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
-    Linux*)     cp .vimrc ~/;;
-    Darwin*)    cp .vimrc ~/;;
+    Linux*)     ln -rsf .vimrc ~/.vimrc ;;
+    Darwin*)    ln -rsf .vimrc ~/.vimrc ;;
     CYGWIN*)    machine=Cygwin;;
     MINGW*)     copy .vimrc ~/;;
     *)          machine="UNKNOWN:${unameOut}"
