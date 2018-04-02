@@ -32,12 +32,18 @@ Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'svermeulen/vim-easyclip'
+Plug 'maxbrunsfeld/vim-yankstack'
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
 Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
+
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "Good completion
 Plug 'padawan-php/deoplete-padawan' "PHP completion
 
@@ -49,7 +55,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'majutsushi/tagbar'
 " Plug 'ludovicchabant/vim-gutentags'
- 
+
 call plug#end()
 
 " General Configuration
@@ -61,7 +67,8 @@ nmap <Leader>s :%s//g<Left><Left>
 set number
 set timeoutlen=1000 ttimeoutlen=0
 " Use spaces instead of tabs
-" set expandtab
+set expandtab
+set pastetoggle=<Leader>p
 
 " Be smart when using tabs ;)
 set smarttab
@@ -78,7 +85,7 @@ set background=dark
 colorscheme peaksea
 
 " Mappings
-inoremap jj <Esc>
+inoremap jk <Esc>
 map <C-n> :NERDTreeToggle<CR>
 let mapleader="\<Space>"
 let g:ctrlp_map='<c-f>'
@@ -166,3 +173,4 @@ let g:gutentags_cache_dir = '~/.tags_cache'
 " 			\ })
 
 " let g:cm_refresh_length=[[1, 2]]
+let g:deoplete#enable_at_startup = 1
