@@ -120,31 +120,11 @@ nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
 " FZF
 nnoremap <C-f> :FZF<cr>
 
-" Ultisnips
-" let g:UltiSnipsExpandTrigger="<C-j>"
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" function! s:check_back_space() abort "{{{
-"     let col = col('.') - 1
-"     return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction"}}}
-
 let g:cm_sources_enable=1
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
 
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 set shortmess+=c
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-
-
-" Snippet expansion
-" imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<CR>")
-" imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 noremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -153,28 +133,14 @@ let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
 let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
-" optional
-inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 
 let g:gutentags_cache_dir = '~/.tags_cache'
 
-" " css completion via `csscomplete#CompleteCSS`
-" " The `'cm_refresh_patterns'` is PCRE.
-" " Be careful with `'scoping': 1` here, not all sources, especially omnifunc,
-" " can handle this feature properly.
-" au User CmSetup call cm#register_source({'name' : 'cm-php',
-" 			\ 'priority': 9, 
-" 			\ 'scoping': 1,
-" 			\ 'scopes': ['php'],
-" 			\ 'abbreviation': 'php',
-" 			\ 'word_pattern': '[\w\-]+',
-" 			\ 'cm_refresh_patterns':['[\w\-]+\s*:\s+'],
-" 			\ 'cm_refresh': {'omnifunc': 'phpcomplete#CompletePHP'},
-" 			\ })
 
-" let g:cm_refresh_length=[[1, 2]]
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
+
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 let g:deoplete#ignore_sources.php = ['omni']
-let g:gitgutter_sign_column_always = 1
-
+set signcolumn=yes
