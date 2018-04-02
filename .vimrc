@@ -21,7 +21,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'easymotion/vim-easymotion'
-Plug 'sickill/vim-monokai'
 Plug 'Shougo/neomru.vim'
 Plug 'wellle/targets.vim'
 Plug 'tommcdo/vim-exchange'
@@ -33,7 +32,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
 Plug 'terryma/vim-multiple-cursors'
-
+Plug 'svermeulen/vim-easyclip'
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -49,7 +48,7 @@ Plug 'vim-utils/vim-ruby-fold'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'majutsushi/tagbar'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
  
 call plug#end()
 
@@ -76,10 +75,10 @@ set tabstop=4
 set t_Co=256
 syntax enable
 set background=dark
-colorscheme molokai
+colorscheme peaksea
 
 " Mappings
-inoremap jk <Esc>
+inoremap jj <Esc>
 map <C-n> :NERDTreeToggle<CR>
 let mapleader="\<Space>"
 let g:ctrlp_map='<c-f>'
@@ -96,19 +95,6 @@ nnoremap <C-l> :tabnext<CR>
 
 
 " Plugins
-" let g:airline#extensions#neomake#enabled = 1
-let g:neomake_ruby_enabled_makers = ['rubocop']
-let g:neomake_open_list = 0
-" call neomake#configure#automake('w')
-"autocmd! BufWritePost * Neomake
-map p <Plug>(miniyank-autoput)
-map P <Plug>(miniyank-autoPut)
-map <C-p> <Plug>(miniyank-cycle)
-
-"autocmd FileType html,css,erb EmmetInstall
-"
-
-
 " easy align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
