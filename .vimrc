@@ -1,5 +1,5 @@
 let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3.6'
+let g:python3_host_prog = '/usr/bin/python3'
 
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align'
@@ -7,7 +7,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
 Plug 'matze/vim-move'
-Plug 'scrooloose/nerdtree',{ 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-vinegar'
 Plug 'mattn/emmet-vim'
 Plug 'eugen0329/vim-esearch'
 Plug 'jiangmiao/auto-pairs'
@@ -19,7 +19,6 @@ Plug 'terryma/vim-expand-region'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/neomru.vim'
 Plug 'wellle/targets.vim'
@@ -44,9 +43,7 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "Good completion
-Plug 'padawan-php/deoplete-padawan' "PHP completion
-
+" Plug 'padawan-php/deoplete-padawan' "PHP completion
 
 
 Plug 'tpope/vim-fugitive'
@@ -144,3 +141,5 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
 let g:deoplete#ignore_sources.php = ['omni']
 set signcolumn=yes
+
+nmap <leader>n :Explore<cr>
