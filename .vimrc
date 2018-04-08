@@ -51,7 +51,7 @@ Plug 'vim-utils/vim-ruby-fold'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'majutsushi/tagbar'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
@@ -128,6 +128,11 @@ let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
 let g:gutentags_cache_dir = '~/.tags_cache'
+let g:gutentags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
+                            \ '*.phar', '*.ini', '*.rst', '*.md',
+                            \ '*vendor/*/test*', '*vendor/*/Test*',
+                            \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
+                            \ '*var/cache*', '*var/log*']
 
 
 " FZF
