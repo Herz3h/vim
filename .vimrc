@@ -42,6 +42,7 @@ Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'StanAngeloff/php.vim'
 
 " Plug 'padawan-php/deoplete-padawan' "PHP completion
 
@@ -168,3 +169,10 @@ let g:deoplete#ignore_sources.php = ['omni']
 set signcolumn=yes
 
 nmap <leader>n :Explore<cr>
+
+let php_html_load = 0
+let php_html_in_heredoc = 0
+let php_html_in_nowdoc = 0
+let php_sql_query = 0
+let php_sql_heredoc = 0
+let php_sql_nowdoc = 0
