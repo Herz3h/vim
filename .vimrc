@@ -176,3 +176,6 @@ let php_html_in_nowdoc = 0
 let php_sql_query = 0
 let php_sql_heredoc = 0
 let php_sql_nowdoc = 0
+
+set re=1
+let g:ruby_path = system('rvm current')
