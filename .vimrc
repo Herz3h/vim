@@ -4,6 +4,7 @@ let g:python3_host_prog = '/usr/bin/python3'
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align'
 Plug 'flazz/vim-colorschemes'
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
 Plug 'matze/vim-move'
@@ -83,7 +84,8 @@ set tabstop=4
 set t_Co=256
 syntax enable
 set background=dark
-colorscheme peaksea
+colorscheme seti
+set termguicolors
 
 " Mappings
 inoremap jk <Esc>
@@ -195,4 +197,3 @@ au User lsp_setup call lsp#register_server({
             \ 'cmd': {server_info->['php', expand('~/.vim/plugged/php-language-server/bin/php-language-server.php')]},
             \ 'whitelist': ['php'],                                                     
             \ })
-
