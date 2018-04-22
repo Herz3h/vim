@@ -7,23 +7,25 @@ Plug 'flazz/vim-colorschemes'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
-Plug 'matze/vim-move'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-dispatch'
+Plug 'matze/vim-move'
 Plug 'mattn/emmet-vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'terryma/vim-expand-region'
 Plug 'tmhedberg/matchit'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/neomru.vim'
 Plug 'wellle/targets.vim'
 Plug 'tommcdo/vim-exchange'
-" Plug 'mhinz/vim-startify'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
@@ -47,14 +49,14 @@ Plug 'prabirshrestha/vim-lsp'
 
 Plug 'StanAngeloff/php.vim'
 
-Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'dkprice/vim-easygrep'
 Plug 'terryma/vim-multiple-cursors'
+
+Plug 'roxma/vim-paste-easy'
 
 call plug#end()
 
@@ -187,6 +189,9 @@ set timeout ttimeoutlen=50
 
 " VINEGAR
 nmap <leader>n :Explore<CR>
+
+" EASYGREP
+" let g:EasyGrepCommand='rg'
 
 let php_html_load = 0
 let php_html_in_heredoc = 0
