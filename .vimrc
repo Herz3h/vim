@@ -10,7 +10,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'matze/vim-move'
 Plug 'tpope/vim-vinegar'
 Plug 'mattn/emmet-vim'
-Plug 'eugen0329/vim-esearch'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -39,12 +38,9 @@ Plug 'honza/vim-snippets'
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
 Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
 
-" Plug 'Shougo/deoplete.nvim'
-" Plug 'roxma/nvim-yarp'
-" Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 
-Plug 'felixfbecker/php-language-server', {'do': 'composer install && composer run-script parse-stubs'}
+Plug 'felixfbecker/php-language-server', {'do': 'composer install && composer run-sCRipt parse-stubs'}
 
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -57,6 +53,8 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'dkprice/vim-easygrep'
+Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 
@@ -64,13 +62,12 @@ call plug#end()
 set ignorecase          " Make searching case insensitive
 set smartcase           " ... unless the query has capital letters.
 set smartindent
-" Search and Replace
-nmap <Leader>s :%s//g<Left><Left>
 set number
-set timeoutlen=1000 ttimeoutlen=0
+set signcolumn=yes
+" set timeoutlen=1000 ttimeoutlen=0
 " Use spaces instead of tabs
 set expandtab
-set pastetoggle=<Leader>p
+set pastetoggle=<leader>p
 
 " Be smart when using tabs ;)
 set smarttab
@@ -78,6 +75,11 @@ set smarttab
 "s 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+
+
+" ruby
+set re=1
+let g:ruby_path = "ruby-2.4.1"
 
 
 " Theme
@@ -88,19 +90,20 @@ colorscheme seti
 set termguicolors
 
 " Mappings
-inoremap jk <Esc>
-map <C-n> :NERDTreeToggle<CR>
 let mapleader="\<Space>"
+inoremap jk <Esc>
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-map <leader>w :w!<cr>
-map <leader>q :q!<cr>
-command W w !sudo tee % > /dev/null
-nnoremap <C-h> :tabprevious<CR>
-nnoremap <C-l> :tabnext<CR>
+map <leader>w :w!<CR>
+map <leader>q :q!<CR>
+map <leader>ee :e ~/.vimrc<CR>
+map <leader>er :so ~/.vimrc<CR>
 
+" Search and Replace
+nmap <leader>s :%s//g<Left><Left>
+command! W w !sudo tee % > /dev/null
 
 " Plugins
 " easy align
@@ -113,10 +116,10 @@ let g:ruby_fold_lines_limit = 200
 " 
 
 " Profiling bindings
-nnoremap <silent> <leader>DD :exe ":profile start profile.log"<cr>:exe ":profile func *"<cr>:exe ":profile file *"<cr>
-nnoremap <silent> <leader>DP :exe ":profile pause"<cr>
-nnoremap <silent> <leader>DC :exe ":profile continue"<cr>
-nnoremap <silent> <leader>DQ :exe ":profile pause"<cr>:noautocmd qall!<cr>
+nnoremap <silent> <leader>DD :exe ":profile start profile.log"<CR>:exe ":profile func *"<CR>:exe ":profile file *"<CR>
+nnoremap <silent> <leader>DP :exe ":profile pause"<CR>
+nnoremap <silent> <leader>DC :exe ":profile continue"<CR>
+nnoremap <silent> <leader>DQ :exe ":profile pause"<CR>:noautocmd qall!<CR>
 
 
 let g:cm_sources_enable=1
@@ -128,7 +131,7 @@ set shortmess+=c
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 noremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
@@ -149,38 +152,41 @@ augroup END
 
 
 " FZF
-nnoremap <C-f> :FZF<cr>
+nnoremap <silent> <leader>f :FZF<CR>
+nnoremap <silent> <leader>l :BLines<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>c :Commits<CR>
+nnoremap <silent> <leader>a :Ag<CR>
+
+let g:fzf_buffers_jump = 1
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%CR"'
+
+
+
 command! -bang -nargs=* Rg
             \ call fzf#vim#grep(
             \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
             \   <bang>0 ? fzf#vim#with_preview('up:60%')
             \           : fzf#vim#with_preview('right:50%:hidden', '?'),
             \   <bang>0)
-let g:fzf_colors =
-            \ { 'fg':      ['fg', 'Normal'],
-            \ 'bg':      ['bg', 'Normal'],
-            \ 'hl':      ['fg', 'Comment'],
-            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-            \ 'hl+':     ['fg', 'Statement'],
-            \ 'info':    ['fg', 'PreProc'],
-            \ 'border':  ['fg', 'Ignore'],
-            \ 'prompt':  ['fg', 'Conditional'],
-            \ 'pointer': ['fg', 'Exception'],
-            \ 'marker':  ['fg', 'Keyword'],
-            \ 'spinner': ['fg', 'Label'],
-            \ 'header':  ['fg', 'Comment'] }
 
 
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
+"  YANKSTACK
+nmap p <Plug>yankstack_substitute_older_paste
+nmap P <Plug>yankstack_substitute_newer_paste
 
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-" let g:deoplete#ignore_sources.php = ['omni']
-set signcolumn=yes
+" MOVE
+let c='a'
+while c <= 'z'
+    exec "set <A-".c.">=\e".c
+    exec "imap \e".c." <A-".c.">"
+    let c = nr2char(1+char2nr(c))
+endw
 
-nmap <leader>n :Explore<cr>
+set timeout ttimeoutlen=50
+
+" VINEGAR
+nmap <leader>n :Explore<CR>
 
 let php_html_load = 0
 let php_html_in_heredoc = 0
@@ -189,8 +195,6 @@ let php_sql_query = 0
 let php_sql_heredoc = 0
 let php_sql_nowdoc = 0
 
-set re=1
-let g:ruby_path = "ruby-2.4.1"
 
 au User lsp_setup call lsp#register_server({                                    
             \ 'name': 'php-language-server',                                            
