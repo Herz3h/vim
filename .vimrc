@@ -28,7 +28,9 @@ Plug 'wellle/targets.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
@@ -57,6 +59,7 @@ Plug 'dkprice/vim-easygrep'
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'roxma/vim-paste-easy'
+Plug 'wellle/visual-split.vim'
 
 call plug#end()
 
@@ -200,6 +203,17 @@ let php_sql_query = 0
 let php_sql_heredoc = 0
 let php_sql_nowdoc = 0
 
+" AIRLINE
+set laststatus=2
+set noshowmode
+let g:airline_theme='jellybeans'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline_powerline_fonts = 1
+
+
+" VISUAL-SPLIT
+xmap <leader>gsa <Plug>(Visual-Split-VSSplitAbove)
 
 au User lsp_setup call lsp#register_server({                                    
             \ 'name': 'php-language-server',                                            
