@@ -28,7 +28,6 @@ Plug 'wellle/targets.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'airblade/vim-gitgutter'
-" Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
@@ -58,7 +57,9 @@ Plug 'terryma/vim-multiple-cursors'
 
 Plug 'wellle/visual-split.vim'
 Plug 'vim-airline/vim-airline'
-
+Plug 'tommcdo/vim-fugitive-blame-ext'
+Plug 'sodapopcan/vim-twiggy'
+Plug 'thaerkh/vim-indentguides'
 
 call plug#end()
 
@@ -149,6 +150,7 @@ let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
                             \ '*vendor/*/test*', '*vendor/*/Test*',
                             \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
                             \ '*var/cache*', '*var/log*']
+
 
 " FZF
 nnoremap <silent> <leader>f :FZF<CR>
