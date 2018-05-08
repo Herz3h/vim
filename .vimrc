@@ -69,6 +69,7 @@ set smartcase           " ... unless the query has capital letters.
 set smartindent
 set number
 set signcolumn=yes
+set guifont=Monaco:h11
 " set timeoutlen=1000 ttimeoutlen=0
 " Use spaces instead of tabs
 set expandtab
