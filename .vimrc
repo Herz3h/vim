@@ -29,7 +29,6 @@ Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'airblade/vim-gitgutter'
 " Plug 'itchyny/lightline.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
@@ -39,8 +38,8 @@ Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
-Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
+" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
+" Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 
@@ -53,13 +52,13 @@ Plug 'StanAngeloff/php.vim'
 
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'vim-ruby/vim-ruby'
-Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'dkprice/vim-easygrep'
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'roxma/vim-paste-easy'
 Plug 'wellle/visual-split.vim'
+Plug 'vim-airline/vim-airline'
+
 
 call plug#end()
 
@@ -97,7 +96,8 @@ set termguicolors
 
 " Mappings
 let mapleader="\<Space>"
-inoremap jk <Esc>
+imap jk <Esc>
+imap kj <Esc>
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -150,13 +150,6 @@ let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
                             \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
                             \ '*var/cache*', '*var/log*']
 
-augroup MyGutentagsStatusLineRefresher
-    autocmd!
-    autocmd User GutentagsUpdating call lightline#update()
-    autocmd User GutentagsUpdated call lightline#update()
-augroup END
-
-
 " FZF
 nnoremap <silent> <leader>f :FZF<CR>
 nnoremap <silent> <leader>l :BLines<CR>
@@ -189,13 +182,15 @@ while c <= 'z'
     let c = nr2char(1+char2nr(c))
 endw
 
-set timeout ttimeoutlen=50
+set timeout timeoutlen=1000 ttimeoutlen=100
 
 " VINEGAR
 nmap <leader>n :Explore<CR>
 
 " EASYGREP
-" let g:EasyGrepCommand='rg'
+set grepprg=ag
+let g:EasyGrepCommand=1
+let g:EasyGrepRecursive=1
 
 let php_html_load = 0
 let php_html_in_heredoc = 0
@@ -211,6 +206,13 @@ let g:airline_theme='jellybeans'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
+
+set noswapfile
+
+
+" DISPATCH
+nmap <leader>t :Dispatch<cr>
+
 
 
 " VISUAL-SPLIT
