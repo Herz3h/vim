@@ -37,15 +37,9 @@ Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
-" Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
+Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
-
-Plug 'felixfbecker/php-language-server', {'do': 'composer install && composer run-sCRipt parse-stubs'}
-
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
 
 Plug 'StanAngeloff/php.vim'
 
@@ -59,7 +53,6 @@ Plug 'wellle/visual-split.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'sodapopcan/vim-twiggy'
-Plug 'thaerkh/vim-indentguides'
 
 call plug#end()
 
