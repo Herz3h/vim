@@ -151,6 +151,7 @@ nnoremap <silent> <leader>l :BLines<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>a :Ag<CR>
+nnoremap <silent> <leader>h :History<CR>
 
 let g:fzf_buffers_jump = 1
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%CR"'
