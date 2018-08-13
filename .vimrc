@@ -13,6 +13,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-dispatch'
 Plug 'matze/vim-move'
 Plug 'mattn/emmet-vim'
@@ -32,8 +33,10 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
-Plug 'maxbrunsfeld/vim-yankstack'
-
+Plug 'pseewald/vim-anyfold'
+Plug 'AndrewRadev/switch.vim'
+" Plug 'LucHermitte/lh-tags'
+Plug 'henrik/vim-indexed-search'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
@@ -65,15 +68,15 @@ set signcolumn=yes
 set guifont=Monaco:h11
 " set timeoutlen=1000 ttimeoutlen=0
 " Use spaces instead of tabs
-set expandtab
+" set expandtab
 set pastetoggle=<leader>p
 
 " Be smart when using tabs ;)
-set smarttab
+" set smarttab
 
 "s 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+" set shiftwidth=4
+" set tabstop=4
 
 
 " ruby
@@ -136,13 +139,13 @@ let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
-let g:gutentags_cache_dir = '~/.tags_cache'
-set statusline+=%{gutentags#statusline()}
-let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
-                            \ '*.phar', '*.ini', '*.rst', '*.md',
-                            \ '*vendor/*/test*', '*vendor/*/Test*',
-                            \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
-                            \ '*var/cache*', '*var/log*']
+" let g:gutentags_cache_dir = '~/.tags_cache'
+" set statusline+=%{gutentags#statusline()}
+" let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
+"                             \ '*.phar', '*.ini', '*.rst', '*.md',
+"                             \ '*vendor/*/test*', '*vendor/*/Test*',
+"                             \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
+"                             \ '*var/cache*', '*var/log*']
 
 
 " FZF
@@ -204,12 +207,26 @@ let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
 
 set noswapfile
+let anyfold_activate=1
+let anyfold_fold_comments=1
+set foldlevel=1
+hi Folded term=NONE cterm=NONE
 
 
 " DISPATCH
 nmap <leader>t :Dispatch<cr>
+" false
 
+"ALE
+let g:ale_php_phpstan_executable = "/root/Lysias5/vendor/bin/phpstan"
 
+"SWITCH
+let g:switch_mapping = "gs"
+let g:switch_custom_definitions = 
+            \ [
+            \ ['true', 'false'],
+            \ { '^\$\(\S*\)': '\$this->\1 = \1;' }
+            \ ]
 
 " VISUAL-SPLIT
 xmap <leader>gsa <Plug>(Visual-Split-VSSplitAbove)
