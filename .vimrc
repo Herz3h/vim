@@ -88,8 +88,9 @@ let g:ruby_path = "ruby-2.4.1"
 set t_Co=256
 syntax enable
 set background=dark
-colorscheme seti
-set termguicolors
+colorscheme 256-grayvim
+
+" set termguicolors
 
 " Mappings
 let mapleader="\<Space>"
@@ -176,12 +177,13 @@ nmap P <Plug>yankstack_substitute_newer_paste
 " MOVE
 let c='a'
 while c <= 'z'
-    exec "set <A-".c.">=\e".c
-    exec "imap \e".c." <A-".c.">"
-    let c = nr2char(1+char2nr(c))
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
 endw
 
-set timeout timeoutlen=1000 ttimeoutlen=100
+set timeout ttimeoutlen=50
+
 
 " VINEGAR
 nmap <leader>n :Explore<CR>
@@ -218,7 +220,7 @@ nmap <leader>t :Dispatch<cr>
 " false
 
 "ALE
-let g:ale_php_phpstan_executable = "/root/Lysias5/vendor/bin/phpstan"
+let ale_php_phpstan_executable = '/home/ahmed/Lysias/vendor/bin/phpstan'
 
 "SWITCH
 let g:switch_mapping = "gs"
@@ -227,6 +229,9 @@ let g:switch_custom_definitions =
             \ ['true', 'false'],
             \ { '^\$\(\S*\)': '\$this->\1 = \1;' }
             \ ]
+
+
+
 
 " VISUAL-SPLIT
 xmap <leader>gsa <Plug>(Visual-Split-VSSplitAbove)
