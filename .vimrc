@@ -39,6 +39,7 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'henrik/vim-indexed-search'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'phpactor/phpactor', {'for ': 'php', 'do': 'composer install'}
 
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
 
@@ -230,6 +231,35 @@ let g:switch_custom_definitions =
             \ { '^\$\(\S*\)': '\$this->\1 = \1;' }
             \ ]
 
+
+" PHPACTOR
+" Include use statement
+nmap <Leader>pu :call phpactor#UseAdd()<CR>
+
+" Invoke the context menu
+nmap <Leader>pm :call phpactor#ContextMenu()<CR>
+
+" Invoke the navigation menu
+nmap <Leader>pn :call phpactor#Navigate()<CR>
+
+" Goto definition of class or class member under the cursor
+nmap <Leader>po :call phpactor#GotoDefinition()<CR>
+
+" Transform the classes in the current file
+nmap <Leader>pt :call phpactor#Transform()<CR>
+
+" Generate a new class (replacing the current file)
+nmap <Leader>pc :call phpactor#ClassNew()<CR>
+
+" Extract expression (normal mode)
+nmap <silent><Leader>pe :call phpactor#ExtractExpression(v:false)<CR>
+
+" Extract expression from selection
+vmap <silent><Leader>pe :<C-U>call phpactor#ExtractExpression(v:true)<CR>
+
+" Extract method from selection
+vmap <silent><Leader>px :<C-U>call phpactor#ExtractMethod()<CR>
+let g:phpactorOmniError = v:true
 
 
 
