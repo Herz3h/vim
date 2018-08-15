@@ -40,6 +40,9 @@ Plug 'henrik/vim-indexed-search'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'phpactor/phpactor', {'for ': 'php', 'do': 'composer install'}
+Plug 'Yggdroot/indentLine'
+Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'lfv89/vim-interestingwords'
 
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
 
@@ -172,8 +175,8 @@ command! -bang -nargs=* Rg
 
 
 "  YANKSTACK
-nmap p <Plug>yankstack_substitute_older_paste
-nmap P <Plug>yankstack_substitute_newer_paste
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 " MOVE
 let c='a'
