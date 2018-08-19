@@ -91,8 +91,11 @@ let g:ruby_path = "ruby-2.4.1"
 " Theme
 set t_Co=256
 syntax enable
-set background=dark
-colorscheme 256-grayvim
+" set background=white
+" colorscheme 256-grayvim
+let g:solarized_termcolors=256
+colorscheme solarized
+" let g:solarized_degrade=1
 
 " set termguicolors
 
@@ -264,6 +267,16 @@ vmap <silent><Leader>pe :<C-U>call phpactor#ExtractExpression(v:true)<CR>
 vmap <silent><Leader>px :<C-U>call phpactor#ExtractMethod()<CR>
 let g:phpactorOmniError = v:true
 
+" SURROUND
+nmap <silent> dsB diB"_dkP`[<`]
+
+" FUGITIVE
+map <leader>gs :Gstatus<CR>
+set diffopt+=vertical
+hi DiffAdd cterm=NONE ctermbg=green ctermfg=black
+hi DiffChange cterm=NONE ctermbg=110 ctermfg=black
+hi DiffDelete cterm=NONE ctermbg=red ctermfg=black
+hi DiffText cterm=NONE ctermbg=14 ctermfg=black
 
 
 " VISUAL-SPLIT
