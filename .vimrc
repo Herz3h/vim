@@ -234,7 +234,7 @@ let g:switch_mapping = "gs"
 let g:switch_custom_definitions = 
             \ [
             \ ['true', 'false'],
-            \ { '^\$\(\S*\)': '\$this->\1 = \1;' }
+            \ { '^\s*\$\([^\s;]*\);': '\$this->\1 = \$\1;' }
             \ ]
 
 
