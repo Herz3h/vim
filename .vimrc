@@ -60,6 +60,9 @@ Plug 'wellle/visual-split.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'sodapopcan/vim-twiggy'
+Plug 'ap/vim-buftabline'
+Plug 'simeji/winresizer'
+Plug 'lilydjwg/colorizer'
 
 call plug#end()
 
@@ -93,8 +96,8 @@ set t_Co=256
 syntax enable
 " set background=white
 " colorscheme 256-grayvim
-let g:solarized_termcolors=256
-colorscheme solarized
+" let g:solarized_termcolors=256
+colorscheme seti
 " let g:solarized_degrade=1
 
 " set termguicolors
@@ -272,6 +275,9 @@ nmap <silent> dsB diB"_dkP`[<`]
 
 " FUGITIVE
 map <leader>gs :Gstatus<CR>
+map <leader>gd :Gdiff<CR>
+map <leader>gh :GitGutterStageHunk<CR>
+map <leader>gb :Gblame<CR>
 set diffopt+=vertical
 hi DiffAdd cterm=NONE ctermbg=green ctermfg=black
 hi DiffChange cterm=NONE ctermbg=110 ctermfg=black
