@@ -32,7 +32,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
 Plug 'pseewald/vim-anyfold'
 Plug 'AndrewRadev/switch.vim'
 " Plug 'LucHermitte/lh-tags'
@@ -69,7 +69,7 @@ call plug#end()
 " General Configuration
 set ignorecase          " Make searching case insensitive
 set smartcase           " ... unless the query has capital letters.
-set smartindent
+" set smartindent
 set number
 set signcolumn=yes
 set guifont=Monaco:h11
@@ -77,6 +77,7 @@ set guifont=Monaco:h11
 " Use spaces instead of tabs
 " set expandtab
 set pastetoggle=<leader>p
+set clipboard=unnamedplus
 
 " Be smart when using tabs ;)
 " set smarttab
@@ -114,6 +115,9 @@ map <leader>w :w!<CR>
 map <leader>q :q!<CR>
 map <leader>ee :e ~/.vimrc<CR>
 map <leader>er :so ~/.vimrc<CR>
+map <CR> :cn<CR>
+nmap <CR> :cn<CR>
+nmap <BS> :cp<CR>
 
 " Search and Replace
 nmap <leader>s :%s//g<Left><Left>
@@ -123,6 +127,7 @@ command! W w !sudo tee % > /dev/null
 " easy align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Ruby fold
 let g:ruby_fold_lines_limit = 200
