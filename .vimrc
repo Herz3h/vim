@@ -63,6 +63,7 @@ Plug 'sodapopcan/vim-twiggy'
 Plug 'ap/vim-buftabline'
 Plug 'simeji/winresizer'
 Plug 'lilydjwg/colorizer'
+Plug 'sjl/gundo.vim'
 
 call plug#end()
 
@@ -293,6 +294,8 @@ hi DiffText cterm=NONE ctermbg=14 ctermfg=black
 nmap gs  <plug>(GrepperOperator)
 xmap gs  <plug>(GrepperOperator)
 
+" GUNDO
+nnoremap <leader>u :GundoToggle<CR>
 
 " VISUAL-SPLIT
 xmap <leader>gsa <Plug>(Visual-Split-VSSplitAbove)
