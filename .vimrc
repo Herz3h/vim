@@ -53,7 +53,7 @@ Plug 'StanAngeloff/php.vim'
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'vim-ruby/vim-ruby'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'dkprice/vim-easygrep'
+Plug 'mhinz/vim-grepper'
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'wellle/visual-split.vim'
@@ -288,6 +288,10 @@ hi DiffAdd cterm=NONE ctermbg=green ctermfg=black
 hi DiffChange cterm=NONE ctermbg=110 ctermfg=black
 hi DiffDelete cterm=NONE ctermbg=red ctermfg=black
 hi DiffText cterm=NONE ctermbg=14 ctermfg=black
+
+" GREPPER
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
 
 
 " VISUAL-SPLIT
