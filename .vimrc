@@ -116,9 +116,6 @@ map <leader>w :w!<CR>
 map <leader>q :q!<CR>
 map <leader>ee :e ~/.vimrc<CR>
 map <leader>er :so ~/.vimrc<CR>
-map <CR> :cn<CR>
-nmap <CR> :cn<CR>
-nmap <BS> :cp<CR>
 
 " Search and Replace
 nmap <leader>s :%s//g<Left><Left>
@@ -291,11 +288,25 @@ hi DiffDelete cterm=NONE ctermbg=red ctermfg=black
 hi DiffText cterm=NONE ctermbg=14 ctermfg=black
 
 " GREPPER
-nmap gs  <plug>(GrepperOperator)
-xmap gs  <plug>(GrepperOperator)
 
 " GUNDO
 nnoremap <leader>u :GundoToggle<CR>
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+runtime plugin/grepper.vim
+let g:grepper.tools = ['rg', 'ag', 'ack-grep', 'grep', 'findstr', 'ack', 'pt', 'sift', 'git']
+
+" ZSHRC
+" TODO: Find a way to add this to zshrc
+" # Allow Ctrl-z to toggle between suspend and resume
+" function Resume {
+"   fg
+"   zle push-input
+"   BUFFER=""
+"   zle accept-line
+" }
+" zle -N Resume
+" bindkey "^Z" Resume
 
 " VISUAL-SPLIT
 xmap <leader>gsa <Plug>(Visual-Split-VSSplitAbove)
