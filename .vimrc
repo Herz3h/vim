@@ -33,7 +33,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
 " Plug 'mxw/vim-jsx'
-Plug 'pseewald/vim-anyfold'
+" Plug 'pseewald/vim-anyfold' " SLOW AS HELL
 Plug 'AndrewRadev/switch.vim'
 " Plug 'LucHermitte/lh-tags'
 Plug 'henrik/vim-indexed-search'
@@ -79,6 +79,9 @@ set guifont=Monaco:h11
 " set expandtab
 set pastetoggle=<leader>p
 set clipboard=unnamedplus
+
+set splitright
+set splitbelow
 
 " Be smart when using tabs ;)
 " set smarttab
