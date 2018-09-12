@@ -43,6 +43,7 @@ Plug 'phpactor/phpactor', {'for ': 'php', 'do': 'composer install'}
 Plug 'Yggdroot/indentLine'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'lfv89/vim-interestingwords'
+Plug 'mhinz/vim-startify'
 
 Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
 
@@ -52,7 +53,7 @@ Plug 'StanAngeloff/php.vim'
 
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'vim-ruby/vim-ruby'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/vim-grepper'
 Plug 'terryma/vim-multiple-cursors'
 
@@ -62,7 +63,7 @@ Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'sodapopcan/vim-twiggy'
 Plug 'ap/vim-buftabline'
 Plug 'simeji/winresizer'
-Plug 'lilydjwg/colorizer'
+" Plug 'lilydjwg/colorizer'
 Plug 'sjl/gundo.vim'
 
 call plug#end()
@@ -313,6 +314,9 @@ let g:grepper.tools = ['rg', 'ag', 'ack-grep', 'grep', 'findstr', 'ack', 'pt', '
 
 " VISUAL-SPLIT
 xmap <leader>gsa <Plug>(Visual-Split-VSSplitAbove)
+
+" STARTIFY
+let g:startify_change_to_dir = 0
 
 au User lsp_setup call lsp#register_server({                                    
             \ 'name': 'php-language-server',                                            
