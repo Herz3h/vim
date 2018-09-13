@@ -79,7 +79,7 @@ set guifont=Monaco:h11
 " Use spaces instead of tabs
 " set expandtab
 set pastetoggle=<leader>p
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 set splitright
 set splitbelow
@@ -173,9 +173,24 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <silent> <leader>h :History<CR>
-
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%CR"'
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+let $FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --bind=up:previous-history,down:next-history,ctrl-p:up,ctrl-n:down'
 
 
 
@@ -237,7 +252,7 @@ nmap <leader>t :Dispatch<cr>
 " false
 
 "ALE
-let ale_php_phpstan_executable = '/home/ahmed/Lysias/vendor/bin/phpstan'
+let ale_php_phpstan_executable = $HOME . "/Lysias5/vendor/bin/phpstan"
 
 "SWITCH
 let g:switch_mapping = "gs"
@@ -285,11 +300,12 @@ map <leader>gs :Gstatus<CR>
 map <leader>gd :Gdiff<CR>
 map <leader>gh :GitGutterStageHunk<CR>
 map <leader>gb :Gblame<CR>
+map <leader>gw :Gwrite<CR>
 set diffopt+=vertical
-hi DiffAdd cterm=NONE ctermbg=green ctermfg=black
-hi DiffChange cterm=NONE ctermbg=110 ctermfg=black
-hi DiffDelete cterm=NONE ctermbg=red ctermfg=black
-hi DiffText cterm=NONE ctermbg=14 ctermfg=black
+" hi DiffAdd cterm=NONE ctermbg=green ctermfg=black
+" hi DiffChange cterm=NONE ctermbg=110 ctermfg=black
+" hi DiffDelete cterm=NONE ctermbg=red ctermfg=black
+" hi DiffText cterm=NONE ctermbg=14 ctermfg=black
 
 " GREPPER
 
@@ -317,6 +333,8 @@ xmap <leader>gsa <Plug>(Visual-Split-VSSplitAbove)
 
 " STARTIFY
 let g:startify_change_to_dir = 0
+"
+set diffopt+=internal,algorithm:patience
 
 au User lsp_setup call lsp#register_server({                                    
             \ 'name': 'php-language-server',                                            
