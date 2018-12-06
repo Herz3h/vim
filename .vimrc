@@ -47,6 +47,8 @@ Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
 Plug 'joshdick/onedark.vim'
 " Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
+Plug 'brooth/far.vim'
+" Plug 'chrisbra/csv.vim'
 
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
@@ -91,7 +93,7 @@ set splitbelow
 "s 1 tab == 4 spaces
 " set shiftwidth=4
 " set tabstop=4
-
+set clipboard=unnamedplus
 
 " ruby
 set re=1
@@ -417,6 +419,10 @@ let g:lightline = {
       \   'cocstatus': 'coc#status'
       \ },
       \ }
+" FAR
+let g:far#source = 'rg'
+"
+" set diffopt+=internal,algorithm:patience
 
 au User lsp_setup call lsp#register_server({                                    
       \ 'name': 'php-language-server',                                            
