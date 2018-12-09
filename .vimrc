@@ -271,6 +271,7 @@ set diffopt+=vertical
 
 " GUNDO
 nnoremap <leader>u :GundoToggle<CR>
+let g:gundo_prefer_python3 = 1
 
 " GREPPER
 nmap gs <plug>(GrepperOperator)
