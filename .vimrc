@@ -22,7 +22,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'terryma/vim-expand-region'
-Plug 'tmhedberg/matchit'
+" Plug 'tmhedberg/matchit'
+Plug 'andymass/vim-matchup'
 Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/neomru.vim'
 Plug 'wellle/targets.vim'
@@ -181,12 +182,13 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 let $FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --bind=up:previous-history,down:next-history,ctrl-p:up,ctrl-n:down'
-command! -bang -nargs=* Rg
-            \ call fzf#vim#grep(
-            \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-            \   <bang>0 ? fzf#vim#with_preview('up:60%')
-            \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-            \   <bang>0)
+let $FZF_DEFAULT_COMMAND= 'rg --files --hidden'
+" command ! -bang -nargs=* Rg
+"             \ call fzf#vim#grep(
+"             \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+"             \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"             \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"             \   <bang>0)
 
 
 "  YANKSTACK
