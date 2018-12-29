@@ -2,7 +2,7 @@ let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/vim-easy-align'
+Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tpope/vim-endwise'
@@ -22,6 +22,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'terryma/vim-expand-region'
+Plug 'junegunn/vim-easy-align'
 " Plug 'tmhedberg/matchit'
 Plug 'andymass/vim-matchup'
 Plug 'easymotion/vim-easymotion'
@@ -117,9 +118,14 @@ let g:ruby_path = "ruby-2.4.1"
 
 
 " Theme
-set t_Co=256
+" set t_Co=256
 syntax enable
-colo onedark
+colo turtles
+
+" Timeout
+set timeout
+set ttimeout
+set timeoutlen=400
 
 " Mappings
 let mapleader="\<Space>"
@@ -299,12 +305,6 @@ let g:far#source = 'rg'
 " NCM2
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
-
-if (empty($TMUX))
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
 
 " ZSHRC
 " TODO: Find a way to add this to zshrc
