@@ -55,8 +55,13 @@ Plug 'brooth/far.vim'
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
-Plug 'phpactor/ncm2-phpactor'
 Plug 'roxma/vim-hug-neovim-rpc'
+
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+Plug 'phpactor/ncm2-phpactor'
 
 " Plug 'StanAngeloff/php.vim'
 
@@ -305,6 +310,11 @@ let g:far#source = 'rg'
 " NCM2
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
+set shortmess+=c
+inoremap <c-c> <ESC>
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inorema  <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " ZSHRC
 " TODO: Find a way to add this to zshrc
