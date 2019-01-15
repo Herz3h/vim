@@ -17,7 +17,8 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-dispatch'
 Plug 'matze/vim-move'
 Plug 'mattn/emmet-vim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'Raimondi/delimitMate'
+" Plug 'vim-scripts/auto-pairs-gentle'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
@@ -47,9 +48,8 @@ Plug 'lfv89/vim-interestingwords'
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
 Plug 'joshdick/onedark.vim'
-" Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install'  }
 Plug 'brooth/far.vim'
-" Plug 'chrisbra/csv.vim'
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
 
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
@@ -62,8 +62,10 @@ Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 Plug 'phpactor/ncm2-phpactor'
-
-" Plug 'StanAngeloff/php.vim'
+Plug 'wellle/tmux-complete.vim'
+Plug 'ncm2/ncm2-tagprefix'
+Plug 'ncm2/ncm2-html-subscope'
+Plug 'ncm2/ncm2-match-highlight'
 
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'vim-ruby/vim-ruby'
@@ -130,7 +132,7 @@ colo turtles
 " Timeout
 set timeout
 set ttimeout
-set timeoutlen=400
+set timeoutlen=500
 
 " Mappings
 let mapleader="\<Space>"
@@ -176,7 +178,6 @@ nnoremap <silent> <leader>f :FZF<CR>
 nnoremap <silent> <leader>l :BLines<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>c :Commits<CR>
-nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <silent> <leader>h :History<CR>
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
@@ -243,6 +244,8 @@ nmap <leader>t :Dispatch<cr>
 
 "ALE
 let ale_php_phpstan_executable = $HOME . "/Lysias5/vendor/bin/phpstan"
+nmap <silent> <leader>aj :ALENext<cr>
+
 
 "SWITCH
 let g:switch_custom_definitions = 
@@ -290,6 +293,7 @@ nnoremap <leader>u :GundoToggle<CR>
 let g:gundo_prefer_python3 = 1
 
 " GREPPER
+nmap <leader>g :Grepper<CR>
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 runtime plugin/grepper.vim
@@ -304,17 +308,40 @@ let g:startify_change_to_dir = 0
 
 " FAR
 let g:far#source = 'rg'
-"
+
 " set diffopt+=internal,algorithm:patience
 
 " NCM2
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c
-inoremap <c-c> <ESC>
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" autocmd BufEnter * call ncm2#enable_for_buffer()
+" set completeopt=noinsert,menuone,noselect
+" set shortmess+=c
+" inoremap <c-c> <ESC>
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inorema  <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" NCM2 Match Highlight
+let g:ncm2#match_highlight='bold'
+
+" MOVE
+let c='a'
+while c <= 'z'
+    exec "set <A-".c.">=\e".c
+    exec "imap \e".c." <A-".c.">"
+    let c = nr2char(1+char2nr(c))
+endw
+
+set timeout ttimeoutlen=50
+
+" AUTO PAIRS
+" inoremap (; (<CR>);<C-c>O
+" inoremap (, (<CR>),<C-c>O
+" inoremap {; {<CR>}<C-c>O
+" inoremap {, {<CR>},<C-c>O
+" inoremap [; [<CR>]<C-c>O
+" inoremap [, [<CR>],<C-c>O
+" let g:AutoPairsUseInsertedCount = 1
+
 
 " ZSHRC
 " TODO: Find a way to add this to zshrc
