@@ -43,12 +43,13 @@ Plug 'henrik/vim-indexed-search'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Yggdroot/indentLine'
-Plug 'maxbrunsfeld/vim-yankstack'
+" Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'lfv89/vim-interestingwords'
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
 Plug 'joshdick/onedark.vim'
 Plug 'brooth/far.vim'
+Plug 'TaDaa/vimade'
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
 
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
@@ -127,7 +128,7 @@ let g:ruby_path = "ruby-2.4.1"
 " Theme
 " set t_Co=256
 syntax enable
-colo turtles
+colo Monokai
 
 " Timeout
 set timeout
