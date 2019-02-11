@@ -46,11 +46,12 @@ Plug 'Yggdroot/indentLine'
 " Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'lfv89/vim-interestingwords'
 Plug 'mhinz/vim-startify'
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 Plug 'joshdick/onedark.vim'
 Plug 'brooth/far.vim'
 Plug 'TaDaa/vimade'
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
+Plug 'ludovicchabant/vim-gutentags'
 
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
@@ -76,13 +77,15 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'wellle/visual-split.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tommcdo/vim-fugitive-blame-ext'
-Plug 'sodapopcan/vim-twiggy'
+Plug 'mitsuhiko/vim-jinja'
 Plug 'ap/vim-buftabline'
 Plug 'simeji/winresizer'
 " Plug 'lilydjwg/colorizer'
 Plug 'sjl/gundo.vim'
+Plug 'svermeulen/vim-easyclip'
 
 call plug#end()
+
 
 " General Configuration
 set ignorecase          " Make searching case insensitive
@@ -91,6 +94,7 @@ set smartcase           " ... unless the query has capital letters.
 set number
 set signcolumn=yes
 set guifont=Monaco:h11
+set relativenumber
 
 " Use spaces instead of tabs
 set expandtab
@@ -128,7 +132,8 @@ let g:ruby_path = "ruby-2.4.1"
 " Theme
 " set t_Co=256
 syntax enable
-colo Monokai
+colo apprentice
+hi Normal ctermbg=233
 
 " Timeout
 set timeout
@@ -177,8 +182,10 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 " FZF
 nnoremap <silent> <leader>f :FZF<CR>
 nnoremap <silent> <leader>l :BLines<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>c :Commits<CR>
+nnoremap <silent> <leader>t :Tags<CR>
+nnoremap <silent> <leader>bf :Buffers<CR>
+nnoremap <silent> <leader>bl :b#<CR>
+nnoremap <silent> <leader>c :FZFYank<CR>
 nnoremap <silent> <leader>h :History<CR>
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
@@ -230,7 +237,7 @@ let php_sql_nowdoc = 0
 " AIRLINE
 set laststatus=2
 set noshowmode
-let g:airline_theme='jellybeans'
+let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
@@ -241,7 +248,7 @@ set foldlevel=1
 hi Folded term=NONE cterm=NONE
 
 " DISPATCH
-nmap <leader>t :Dispatch<cr>
+nmap <leader>td :Dispatch<cr>
 
 "ALE
 let ale_php_phpstan_executable = $HOME . "/Lysias5/vendor/bin/phpstan"
@@ -286,6 +293,12 @@ map <leader>gd :Gdiff<CR>
 map <leader>gh :GitGutterStageHunk<CR>
 map <leader>gb :Gblame<CR>
 map <leader>gw :Gwrite<CR>
+" " https://github.com/tpope/vim-fugitive#faq
+" " patch that automatically opens the quickfix window after :Ggrep
+autocmd QuickFixCmdPost *grep* cwindow
+" " Prevent Glog output to ternimal instead of quickfix window
+" " https://github.com/tpope/vim-fugitive/issues/677
+nnoremap <leader>gl :silent! Glog<CR> :redraw!<CR>
 set diffopt+=vertical
 
 
@@ -311,23 +324,23 @@ let g:startify_change_to_dir = 0
 let g:far#source = 'rg'
 
 " TAGBAR
-autocmd VimEnter * TagbarOpen
-let g:tagbar_type_javascript = {
-      \ 'ctagstype': 'javascript',
-      \ 'kinds': [
-      \ 'A:arrays',
-      \ 'P:properties',
-      \ 'T:tags',
-      \ 'O:objects',
-      \ 'G:generator function',
-      \ 'F:functions',
-      \ 'C:constructors/classes',
-      \ 'M:methods',
-      \ 'V:variables',
-      \ 'I:imports',
-      \ 'E:exports',
-      \ 'S:styled components'
-      \ ]}
+" autocmd VimEnter * TagbarOpen
+" let g:tagbar_type_javascript = {
+"       \ 'ctagstype': 'javascript',
+"       \ 'kinds': [
+"       \ 'A:arrays',
+"       \ 'P:properties',
+"       \ 'T:tags',
+"       \ 'O:objects',
+"       \ 'G:generator function',
+"       \ 'F:functions',
+"       \ 'C:constructors/classes',
+"       \ 'M:methods',
+"       \ 'V:variables',
+"       \ 'I:imports',
+"       \ 'E:exports',
+"       \ 'S:styled components'
+"       \ ]}
 
 
 "
@@ -346,14 +359,65 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 let g:ncm2#match_highlight='bold'
 
 " MOVE
-let c='a'
-while c <= 'z'
-    exec "set <A-".c.">=\e".c
-    exec "imap \e".c." <A-".c.">"
-    let c = nr2char(1+char2nr(c))
-endw
+" let c='a'
+" while c <= 'z'
+"     exec "set <A-".c.">=\e".c
+"     exec "imap \e".c." <A-".c.">"
+"     let c = nr2char(1+char2nr(c))
+" endw
 
 set timeout ttimeoutlen=50
+
+
+nmap <leader>qp :cp<CR>
+nmap <leader>qn :cn<CR>
+
+" VIMADE
+let g:vimade = {
+  \ "normalid": '',
+  \ "basefg": '233',
+  \ "basebg": '233',
+  \ "fadelevel": 0.4,
+  \ "colbufsize": 30,
+  \ "rowbufsize": 30,
+  \ "checkinterval": 32,
+  \ }
+
+
+nnoremap <esc> :noh<return><esc>
+
+au BufRead,BufNewFile *.twig set filetype=htmljinja
+
+" EASYCLIP
+nnoremap gm m
+function! s:yank_list()
+  redir => ys
+  silent Yanks
+  redir END
+  return split(ys, '\n')[1:]
+endfunction
+
+function! s:yank_handler(reg)
+  if empty(a:reg)
+    echo "aborted register paste"
+  else
+    let token = split(a:reg, ' ')
+    execute 'Paste' . token[0]
+  endif
+endfunction
+
+command! FZFYank call fzf#run({
+\ 'source': <sid>yank_list(),
+\ 'sink': function('<sid>yank_handler'),
+\ 'options': '-m',
+\ 'down': 12
+\ })
+let g:EasyClipEnableBlackHoleRedirect = 0
+
+" GUTENTAGS
+
+let g:gutentags_cache_dir=$HOME . '/.tags/'
+
 
 " AUTO PAIRS
 " inoremap (; (<CR>);<C-c>O
