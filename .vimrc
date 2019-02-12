@@ -83,6 +83,7 @@ Plug 'simeji/winresizer'
 " Plug 'lilydjwg/colorizer'
 Plug 'sjl/gundo.vim'
 Plug 'svermeulen/vim-easyclip'
+Plug 'romainl/vim-qf'
 
 call plug#end()
 
@@ -288,11 +289,11 @@ let g:phpactorOmniError = v:true
 nmap <silent> dsB diB"_dkP`[<`]
 
 " FUGITIVE
-map <leader>gs :Gstatus<CR>
-map <leader>gd :Gdiff<CR>
-map <leader>gh :GitGutterStageHunk<CR>
-map <leader>gb :Gblame<CR>
-map <leader>gw :Gwrite<CR>
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gh :GitGutterStageHunk<CR>
+nmap <leader>gb :Gblame<CR>
+nmap <leader>gw :Gwrite<CR>
 " " https://github.com/tpope/vim-fugitive#faq
 " " patch that automatically opens the quickfix window after :Ggrep
 autocmd QuickFixCmdPost *grep* cwindow
@@ -308,8 +309,8 @@ let g:gundo_prefer_python3 = 1
 
 " GREPPER
 nmap <leader>g :Grepper<CR>
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
+nmap gf <plug>(GrepperOperator)
+xmap gf <plug>(GrepperOperator)
 runtime plugin/grepper.vim
 let g:grepper.tools = ['rg', 'ag', 'ack-grep', 'grep', 'findstr', 'ack', 'pt', 'sift', 'git']
 
