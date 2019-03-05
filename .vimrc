@@ -46,7 +46,7 @@ Plug 'Yggdroot/indentLine'
 " Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'lfv89/vim-interestingwords'
 Plug 'mhinz/vim-startify'
-" Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 Plug 'joshdick/onedark.vim'
 Plug 'brooth/far.vim'
 Plug 'TaDaa/vimade'
@@ -242,6 +242,7 @@ let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tagbar#flags = 'f'
 
 let anyfold_activate=1
 let anyfold_fold_comments=1
@@ -333,22 +334,22 @@ let g:far#source = 'rg'
 
 " TAGBAR
 " autocmd VimEnter * TagbarOpen
-" let g:tagbar_type_javascript = {
-"       \ 'ctagstype': 'javascript',
-"       \ 'kinds': [
-"       \ 'A:arrays',
-"       \ 'P:properties',
-"       \ 'T:tags',
-"       \ 'O:objects',
-"       \ 'G:generator function',
-"       \ 'F:functions',
-"       \ 'C:constructors/classes',
-"       \ 'M:methods',
-"       \ 'V:variables',
-"       \ 'I:imports',
-"       \ 'E:exports',
-"       \ 'S:styled components'
-"       \ ]}
+let g:tagbar_type_javascript = {
+      \ 'ctagstype': 'javascript',
+      \ 'kinds': [
+      \ 'A:arrays',
+      \ 'P:properties',
+      \ 'T:tags',
+      \ 'O:objects',
+      \ 'G:generator function',
+      \ 'F:functions',
+      \ 'C:constructors/classes',
+      \ 'M:methods',
+      \ 'V:variables',
+      \ 'I:imports',
+      \ 'E:exports',
+      \ 'S:styled components'
+      \ ]}
 
 
 "
