@@ -1,5 +1,5 @@
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
@@ -51,7 +51,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'brooth/far.vim'
 Plug 'TaDaa/vimade'
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ntpeters/vim-better-whitespace'
 
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
 Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
@@ -182,7 +183,6 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " FZF
 nnoremap <silent> <leader>f :FZF<CR>
-nnoremap <silent> <leader>l :BLines<CR>
 nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>bf :Buffers<CR>
 nnoremap <silent> <leader>bl :b#<CR>
@@ -252,12 +252,19 @@ hi Folded term=NONE cterm=NONE
 nmap <leader>td :Dispatch<cr>
 
 "ALE
-let ale_php_phpstan_executable = $HOME . "/Lysias5/vendor/bin/phpstan"
+let ale_php_phpstan_executable = "./vendor/bin/phpstan"
+let ale_php_phpstan_options = "--level max"
+let ale_php_cs_fixer_executable = "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer"
+let ale_php_cs_fixer_options = "--rules='{\"braces\": {\"position_after_control_structures\": \"next\", \"position_after_functions_and_oop_constructs\": \"next\", \"position_after_anonymous_constructs\": \"next\"} }'"
+let g:ale_virtualtext_cursor=1
+let g:ale_fixers = {}
+let g:ale_fixers["php"] = ["php_cs_fixer"]
 nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>af :ALEFix<cr>
 
 
 "SWITCH
-let g:switch_custom_definitions = 
+let g:switch_custom_definitions =
             \ [
             \ ['true', 'false'],
             \ { '^\s*\$\([^\s;]*\);': '\$this->\1 = \$\1;' }
@@ -417,7 +424,7 @@ let g:EasyClipEnableBlackHoleRedirect = 0
 
 " GUTENTAGS
 
-let g:gutentags_cache_dir=$HOME . '/.tags/'
+" let g:gutentags_cache_dir=$HOME . '/.tags/'
 
 
 " AUTO PAIRS
@@ -429,6 +436,20 @@ let g:gutentags_cache_dir=$HOME . '/.tags/'
 " inoremap [, [<CR>],<C-c>O
 " let g:AutoPairsUseInsertedCount = 1
 
+" GUDNO
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+  let myUndoDir = expand(vimDir . '/undodir')
+  " Create dirs
+  call system('mkdir ' . vimDir)
+  call system('mkdir ' . myUndoDir)
+  let &undodir = myUndoDir
+  set undofile
+endif
 
 " ZSHRC
 " TODO: Find a way to add this to zshrc
