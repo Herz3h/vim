@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
@@ -47,22 +46,7 @@ Plug 'TaDaa/vimade'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'ntpeters/vim-better-whitespace'
 
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py'  }
-Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-Plug 'phpactor/ncm2-phpactor'
-Plug 'wellle/tmux-complete.vim'
-Plug 'ncm2/ncm2-tagprefix'
-Plug 'ncm2/ncm2-html-subscope'
-Plug 'ncm2/ncm2-match-highlight'
-
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mhinz/vim-grepper'
@@ -175,10 +159,9 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " FZF
 nnoremap <silent> <leader>f :FZF<CR>
-nnoremap <silent> <leader>t :Tags<CR>
 nnoremap <silent> <leader>bf :Buffers<CR>
 nnoremap <silent> <leader>bl :b#<CR>
-nnoremap <silent> <leader>c :FZFYank<CR>
+nnoremap <silent> <leader>y :FZFYank<CR>
 nnoremap <silent> <leader>h :History<CR>
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
@@ -251,7 +234,9 @@ let ale_php_cs_fixer_executable = "./vendor/friendsofphp/php-cs-fixer/php-cs-fix
 let ale_php_cs_fixer_options = "--rules='{\"braces\": {\"position_after_control_structures\": \"next\", \"position_after_functions_and_oop_constructs\": \"next\", \"position_after_anonymous_constructs\": \"next\"} }'"
 let g:ale_virtualtext_cursor=1
 let g:ale_fixers = {}
-let g:ale_fixers["php"] = ["php_cs_fixer"]
+let g:ale_fixers["php"] = ["php_cs_fixer", "trim_whitespace"]
+let g:ale_fixers["javascript"] = ["eslint", "trim_whitespace"]
+let g:ale_fix_on_save=1
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>af :ALEFix<cr>
 
@@ -344,28 +329,7 @@ let g:tagbar_type_javascript = {
       \ ]}
 
 
-"
-" set diffopt+=internal,algorithm:patience
-
-" NCM2
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c
-inoremap <c-c> <ESC>
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inorema  <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" NCM2 Match Highlight
-let g:ncm2#match_highlight='bold'
-
-" MOVE
-" let c='a'
-" while c <= 'z'
-"     exec "set <A-".c.">=\e".c
-"     exec "imap \e".c." <A-".c.">"
-"     let c = nr2char(1+char2nr(c))
-" endw
+set diffopt+=internal,algorithm:patience
 
 set timeout ttimeoutlen=50
 
@@ -432,6 +396,129 @@ if has('persistent_undo')
   call system('mkdir ' . myUndoDir)
   let &undodir = myUndoDir
   set undofile
+endif
+
+" COC.VIM
+if has('nvim')
+  " if hidden is not set, TextEdit might fail.
+  set hidden
+
+  " Better display for messages
+  set cmdheight=2
+
+  " Smaller updatetime for CursorHold & CursorHoldI
+  set updatetime=300
+
+  " don't give |ins-completion-menu| messages.
+  set shortmess+=c
+
+  " always show signcolumns
+  set signcolumn=yes
+
+  " Use tab for trigger completion with characters ahead and navigate.
+  " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
+
+  " Use <c-space> for trigger completion.
+  inoremap <silent><expr> <c-space> coc#refresh()
+
+  " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+  " Coc only does snippet and additional edit on confirm.
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+  " Use `[c` and `]c` for navigate diagnostics
+  " nmap <silent> [c <Plug>(coc-diagnostic-prev)
+  " nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+  " Remap keys for gotos
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+
+  " Use K for show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " Remap for rename current word
+  nmap <leader>crn <Plug>(coc-rename)
+
+  " Remap for format selected region
+  vmap <leader>cf  <Plug>(coc-format-selected)
+  nmap <leader>cf  <Plug>(coc-format-selected)
+
+  augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  augroup end
+
+  " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+  vmap <leader>ca  <Plug>(coc-codeaction-selected)
+  nmap <leader>ca  <Plug>(coc-codeaction-selected)
+
+  " Remap for do codeAction of current line
+  nmap <leader>cac  <Plug>(coc-codeaction)
+  " Fix autofix problem of current line
+  nmap <leader>cqf  <Plug>(coc-fix-current)
+
+  " Use `:Format` for format current buffer
+  command! -nargs=0 Format :call CocAction('format')
+
+  " Use `:Fold` for fold current buffer
+  command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+
+  " Add diagnostic info for https://github.com/itchyny/lightline.vim
+  let g:lightline = {
+        \ 'colorscheme': 'wombat',
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+        \ },
+        \ 'component_function': {
+        \   'cocstatus': 'coc#status'
+        \ },
+        \ }
+
+
+
+  " Using CocList
+  " Show commands
+  nnoremap <silent> <space>cc  :<C-u>CocList commands<cr>
+  " Find symbol of current document
+  nnoremap <silent> <space>co  :<C-u>CocList outline<cr>
+  " Search workspace symbols
+  nnoremap <silent> <space>cs  :<C-u>CocList -I symbols<cr>
+  " Do default action for next item.
+  nnoremap <silent> <space>cj  :<C-u>CocNext<CR>
+  " Do default action for previous item.
+  nnoremap <silent> <space>ck  :<C-u>CocPrev<CR>
+  " Resume latest coc list
+  nnoremap <silent> <space>cp  :<C-u>CocListResume<CR>
+
+
 endif
 
 " ZSHRC

@@ -1,18 +1,18 @@
 {
-	"tsserver.enableJavascript": true,
-	"languageserver": {
-		"phplang": {
-			"command": "php",
-			"args": ["vendor/felixfbecker/language-server/bin/php-language-server.php"],
-			"filetypes": ["php"]
-
-		},
-		"flow": {
-			"command": "flow-language-server",
-			"args": ["--stdio"],
-			"filetypes": ["javascript", "javascriptreact"],
-			"rootPatterns": [".flowconfig"]
-		}
-	},
-	"coc.preferences.timeout": 5000
+    "languageserver": {
+        "intelephense": {
+            "command": "node",
+            "args": ["/usr/local/lib/node_modules/intelephense/lib/intelephense.js", "--stdio"],
+            "filetypes": ["php"]
+        },
+        "flow": {
+            "command": "flow",
+            "args": ["lsp"],
+            "filetypes": ["javascript", "javascriptreact"],
+            "initializationOptions": {},
+            "requireRootPattern": true,
+            "settings": {},
+            "rootPatterns": [".flowconfig"]
+        }
+    }
 }
