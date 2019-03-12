@@ -18,13 +18,11 @@ Plug 'tpope/vim-dispatch'
 Plug 'matze/vim-move'
 Plug 'mattn/emmet-vim'
 Plug 'Raimondi/delimitMate'
-" Plug 'vim-scripts/auto-pairs-gentle'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
-" Plug 'tmhedberg/matchit'
 Plug 'andymass/vim-matchup'
 Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/neomru.vim'
@@ -35,22 +33,17 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
-" Plug 'mxw/vim-jsx'
-" Plug 'pseewald/vim-anyfold' " SLOW AS HELL
 Plug 'AndrewRadev/switch.vim'
-" Plug 'LucHermitte/lh-tags'
 Plug 'henrik/vim-indexed-search'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Yggdroot/indentLine'
-" Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'lfv89/vim-interestingwords'
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
 Plug 'joshdick/onedark.vim'
 Plug 'brooth/far.vim'
 Plug 'TaDaa/vimade'
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'ntpeters/vim-better-whitespace'
 
@@ -81,7 +74,6 @@ Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'ap/vim-buftabline'
 Plug 'simeji/winresizer'
-" Plug 'lilydjwg/colorizer'
 Plug 'sjl/gundo.vim'
 Plug 'svermeulen/vim-easyclip'
 Plug 'romainl/vim-qf'
@@ -424,20 +416,10 @@ command! FZFYank call fzf#run({
 let g:EasyClipEnableBlackHoleRedirect = 0
 
 " GUTENTAGS
-
 " let g:gutentags_cache_dir=$HOME . '/.tags/'
 
 
-" AUTO PAIRS
-" inoremap (; (<CR>);<C-c>O
-" inoremap (, (<CR>),<C-c>O
-" inoremap {; {<CR>}<C-c>O
-" inoremap {, {<CR>},<C-c>O
-" inoremap [; [<CR>]<C-c>O
-" inoremap [, [<CR>],<C-c>O
-" let g:AutoPairsUseInsertedCount = 1
-
-" GUDNO
+" GUNDO
 " Put plugins and dictionaries in this dir (also on Windows)
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
