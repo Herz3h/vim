@@ -42,7 +42,7 @@ Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
 Plug 'joshdick/onedark.vim'
 Plug 'brooth/far.vim'
-Plug 'TaDaa/vimade'
+" Plug 'TaDaa/vimade'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'ntpeters/vim-better-whitespace'
 
@@ -338,15 +338,15 @@ nmap <leader>qp :cp<CR>
 nmap <leader>qn :cn<CR>
 
 " VIMADE
-let g:vimade = {
-  \ "normalid": '',
-  \ "basefg": '233',
-  \ "basebg": '233',
-  \ "fadelevel": 0.4,
-  \ "colbufsize": 30,
-  \ "rowbufsize": 30,
-  \ "checkinterval": 32,
-  \ }
+" let g:vimade = {
+"   \ "normalid": '',
+"   \ "basefg": '233',
+"   \ "basebg": '233',
+"   \ "fadelevel": 0.4,
+"   \ "colbufsize": 30,
+"   \ "rowbufsize": 30,
+"   \ "checkinterval": 32,
+"   \ }
 
 
 nnoremap <esc> :noh<return><esc>
