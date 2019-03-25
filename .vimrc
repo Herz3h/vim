@@ -37,7 +37,7 @@ Plug 'henrik/vim-indexed-search'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Yggdroot/indentLine'
-Plug 'lfv89/vim-interestingwords'
+" Plug 'lfv89/vim-interestingwords'
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
 Plug 'joshdick/onedark.vim'
@@ -45,6 +45,7 @@ Plug 'brooth/far.vim'
 " Plug 'TaDaa/vimade'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'benmills/vimux'
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'vim-utils/vim-ruby-fold'
@@ -110,7 +111,7 @@ let g:ruby_path = "ruby-2.4.1"
 " Theme
 " set t_Co=256
 syntax enable
-colo apprentice
+colo molokayo
 hi Normal ctermbg=233
 
 " Timeout
@@ -127,7 +128,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 map <leader>w :w!<CR>
-map <leader>q :q!<CR>
 map <leader>ee :e ~/.vimrc<CR>
 map <leader>er :so ~/.vimrc<CR>
 
@@ -202,14 +202,6 @@ set grepprg=ag
 let g:EasyGrepCommand=1
 let g:EasyGrepRecursive=1
 
-" PHPACTOR
-let php_html_load = 0
-let php_html_in_heredoc = 0
-let php_html_in_nowdoc = 0
-let php_sql_query = 0
-let php_sql_heredoc = 0
-let php_sql_nowdoc = 0
-
 " AIRLINE
 set laststatus=2
 set noshowmode
@@ -247,28 +239,6 @@ let g:switch_custom_definitions =
             \ ['true', 'false'],
             \ { '^\s*\$\([^\s;]*\);': '\$this->\1 = \$\1;' }
             \ ]
-
-
-" PHPACTOR
-" Include use statement
-nmap <Leader>pu :call phpactor#UseAdd()<CR>
-" Invoke the context menu
-nmap <Leader>pm :call phpactor#ContextMenu()<CR>
-" Invoke the navigation menu
-nmap <Leader>pn :call phpactor#Navigate()<CR>
-" Goto definition of class or class member under the cursor
-nmap <Leader>po :call phpactor#GotoDefinition()<CR>
-" Transform the classes in the current file
-nmap <Leader>pt :call phpactor#Transform()<CR>
-" Generate a new class (replacing the current file)
-nmap <Leader>pc :call phpactor#ClassNew()<CR>
-" Extract expression (normal mode)
-nmap <silent><Leader>pe :call phpactor#ExtractExpression(v:false)<CR>
-" Extract expression from selection
-vmap <silent><Leader>pe :<C-U>call phpactor#ExtractExpression(v:true)<CR>
-" Extract method from selection
-vmap <silent><Leader>px :<C-U>call phpactor#ExtractMethod()<CR>
-let g:phpactorOmniError = v:true
 
 " SURROUND
 nmap <silent> dsB diB"_dkP`[<`]
@@ -334,8 +304,8 @@ set diffopt+=internal,algorithm:patience
 set timeout ttimeoutlen=50
 
 
-nmap <leader>qp :cp<CR>
-nmap <leader>qn :cn<CR>
+nmap <leader>k :cp<CR>
+nmap <leader>j :cn<CR>
 
 " VIMADE
 " let g:vimade = {
@@ -487,7 +457,7 @@ if has('nvim')
   command! -nargs=0 Format :call CocAction('format')
 
   " Use `:Fold` for fold current buffer
-  command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+  command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 
   " Add diagnostic info for https://github.com/itchyny/lightline.vim
@@ -520,6 +490,9 @@ if has('nvim')
 
 
 endif
+
+" VIMUX
+nmap <leader>t :VimuxRunLastCommand<CR>
 
 " ZSHRC
 " TODO: Find a way to add this to zshrc
