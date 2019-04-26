@@ -111,7 +111,7 @@ let g:ruby_path = "ruby-2.4.1"
 " Theme
 " set t_Co=256
 syntax enable
-colo molokayo
+colo seti
 hi Normal ctermbg=233
 
 " Timeout
@@ -228,6 +228,7 @@ let g:ale_virtualtext_cursor=1
 let g:ale_fixers = {}
 let g:ale_fixers["php"] = ["php_cs_fixer", "trim_whitespace"]
 let g:ale_fixers["javascript"] = ["eslint", "trim_whitespace"]
+let g:ale_fixers["ruby"] = ["trim_whitespace"]
 let g:ale_fix_on_save=1
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>af :ALEFix<cr>
@@ -244,7 +245,7 @@ let g:switch_custom_definitions =
 nmap <silent> dsB diB"_dkP`[<`]
 
 " FUGITIVE
-nmap <leader>gs :Gstatus<CR>
+nmap <leader>gs :vertical Gstatus<CR>
 nmap <leader>gd :Gdiff<CR>
 nmap <leader>gh :GitGutterStageHunk<CR>
 nmap <leader>gb :Gblame<CR>
@@ -300,6 +301,9 @@ let g:tagbar_type_javascript = {
 
 
 set diffopt+=internal,algorithm:patience
+set diffopt+=iwhiteall
+set diffopt-=vertical
+set diffopt+=horizontal
 
 set timeout ttimeoutlen=50
 

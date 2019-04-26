@@ -5,6 +5,11 @@
             "args": ["/usr/local/lib/node_modules/intelephense/lib/intelephense.js", "--stdio"],
             "filetypes": ["php"]
         },
+        "solargraph": {
+            "command": "solargraph",
+            "args": ["stdio"],
+            "filetypes": ["ruby"]
+        },
         "flow": {
             "command": "flow",
             "args": ["lsp"],
