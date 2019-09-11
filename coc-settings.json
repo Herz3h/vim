@@ -9,15 +9,10 @@
             "command": "solargraph",
             "args": ["stdio"],
             "filetypes": ["ruby"]
-        },
-        "flow": {
-            "command": "flow",
-            "args": ["lsp"],
-            "filetypes": ["javascript", "javascriptreact"],
-            "initializationOptions": {},
-            "requireRootPattern": true,
-            "settings": {},
-            "rootPatterns": [".flowconfig"]
         }
+    },
+    "python":
+    {
+        "jediEnabled": false
     }
 }

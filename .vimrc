@@ -16,7 +16,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-dispatch'
 Plug 'matze/vim-move'
 Plug 'mattn/emmet-vim'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
@@ -46,6 +46,8 @@ Plug 'brooth/far.vim'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'benmills/vimux'
+Plug 'whiteinge/diffconflicts'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'vim-utils/vim-ruby-fold'
@@ -62,6 +64,8 @@ Plug 'simeji/winresizer'
 Plug 'sjl/gundo.vim'
 Plug 'svermeulen/vim-easyclip'
 Plug 'romainl/vim-qf'
+Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'vim-scripts/YankRing.vim'
 
 call plug#end()
 
@@ -111,8 +115,8 @@ let g:ruby_path = "ruby-2.4.1"
 " Theme
 " set t_Co=256
 syntax enable
-colo seti
-hi Normal ctermbg=233
+colo monokai-phoenix
+" hi Normal ctermbg=233
 
 " Timeout
 set timeout
@@ -195,7 +199,7 @@ nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
 " VINEGAR
-nmap <leader>n :Explore<CR>
+nmap <leader>e :Explore<CR>
 
 " EASYGREP
 set grepprg=ag
@@ -246,7 +250,7 @@ nmap <silent> dsB diB"_dkP`[<`]
 
 " FUGITIVE
 nmap <leader>gs :vertical Gstatus<CR>
-nmap <leader>gd :Gdiff<CR>
+nmap <leader>gd :Gdiffsplit!<CR>
 nmap <leader>gh :GitGutterStageHunk<CR>
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gw :Gwrite<CR>
@@ -495,6 +499,9 @@ if has('nvim')
 
 endif
 
+" YANKRING
+nnoremap <leader>p :YRShow<CR>
+
 " VIMUX
 nmap <leader>t :VimuxRunLastCommand<CR>
 
@@ -509,3 +516,8 @@ nmap <leader>t :VimuxRunLastCommand<CR>
 " }
 " zle -N Resume
 " bindkey "^Z" Resume
+"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=none ctermbg=57 gui=none guifg=bg guibg=Yellow
