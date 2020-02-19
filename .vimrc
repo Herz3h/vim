@@ -8,21 +8,21 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-dispatch'
-Plug 'matze/vim-move'
 Plug 'mattn/emmet-vim'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
 Plug 'andymass/vim-matchup'
+" Plug 'tmsvg/pear-tree'
 Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/neomru.vim'
 Plug 'wellle/targets.vim'
@@ -48,6 +48,12 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'benmills/vimux'
 Plug 'whiteinge/diffconflicts'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
+Plug 'tobyS/php-accessors.vim'
+" Plug 'francoiscabrol/ranger.vim'
+Plug 'Glench/Vim-Jinja2-Syntax'
+
+
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'vim-utils/vim-ruby-fold'
@@ -58,14 +64,17 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'wellle/visual-split.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tommcdo/vim-fugitive-blame-ext'
-Plug 'mitsuhiko/vim-jinja'
 Plug 'ap/vim-buftabline'
 Plug 'simeji/winresizer'
 Plug 'sjl/gundo.vim'
 Plug 'svermeulen/vim-easyclip'
 Plug 'romainl/vim-qf'
-Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'docteurklein/php-getter-setter.vim'
 Plug 'vim-scripts/YankRing.vim'
+Plug 'liuchengxu/vim-clap'
+Plug 'wellle/tmux-complete.vim'
+Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'machakann/vim-sandwich'
 
 call plug#end()
 
@@ -103,6 +112,7 @@ set nowritebackup
 set autoread
 set autowrite
 set autowriteall
+set nofoldenable
 
 filetype plugin on
 
@@ -115,7 +125,9 @@ let g:ruby_path = "ruby-2.4.1"
 " Theme
 " set t_Co=256
 syntax enable
-colo monokai-phoenix
+colo monokai-chris
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=none ctermbg=57 gui=none guifg=bg guibg=Yellow
 " hi Normal ctermbg=233
 
 " Timeout
@@ -132,8 +144,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 map <leader>w :w!<CR>
-map <leader>ee :e ~/.vimrc<CR>
-map <leader>er :so ~/.vimrc<CR>
+map <leader>ve :e ~/.vimrc<CR>
+map <leader>vr :so ~/.vimrc<CR>
 
 " Search and Replace
 nmap <leader>s :%s//g<Left><Left>
@@ -198,8 +210,13 @@ let $FZF_DEFAULT_COMMAND= 'rg --files --hidden'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
-" VINEGAR
-nmap <leader>e :Explore<CR>
+" RANGER
+if executable('ranger')
+  " nmap let g:ranger_map_keys = 0
+  " nmap<leader>e :Ranger<CR>
+" else
+  nmap<leader>e :Explore<CR>
+endif
 
 " EASYGREP
 set grepprg=ag
@@ -246,11 +263,11 @@ let g:switch_custom_definitions =
             \ ]
 
 " SURROUND
-nmap <silent> dsB diB"_dkP`[<`]
+" nmap <silent> dsB diB"_dkP`[<`]
 
 " FUGITIVE
 nmap <leader>gs :vertical Gstatus<CR>
-nmap <leader>gd :Gdiffsplit!<CR>
+nmap <leader>gd :Gvdiffsplit!<CR>
 nmap <leader>gh :GitGutterStageHunk<CR>
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gw :Gwrite<CR>
@@ -264,7 +281,6 @@ set diffopt+=vertical
 
 
 " GUNDO
-nnoremap <leader>u :GundoToggle<CR>
 let g:gundo_prefer_python3 = 1
 
 " GREPPER
@@ -329,7 +345,9 @@ nmap <leader>j :cn<CR>
 
 nnoremap <esc> :noh<return><esc>
 
-au BufRead,BufNewFile *.twig set filetype=htmljinja
+au BufNewFile,BufRead *.html,*.twig set filetype=jinja
+
+
 
 " EASYCLIP
 nnoremap gm m
@@ -517,7 +535,68 @@ nmap <leader>t :VimuxRunLastCommand<CR>
 " zle -N Resume
 " bindkey "^Z" Resume
 "
+"
+
+" ULTISNIPS
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=none ctermbg=57 gui=none guifg=bg guibg=Yellow
+" CLAP
+map <leader>cl :Clap grep<CR>
+
+" Format XMl
+com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
+
+" PEAR TREE
+let g:pear_tree_pairs = {
+            \ '(': {'closer': ')'},
+            \ '[': {'closer': ']'},
+            \ '{': {'closer': '}'},
+            \ "'": {'closer': "'"},
+            \ '"': {'closer': '"'},
+            \ '{{': {'closer': '}}'},
+            \ '{%': {'closer': '%}'}
+            \ }
+
+" PHPACTOR
+" Include use statement
+nmap <Leader>gu :call phpactor#UseAdd()<CR>
+
+" Invoke the context menu
+nmap <Leader>gm :call phpactor#ContextMenu()<CR>
+
+" Transform the classes in the current file
+nmap <Leader>gt :call phpactor#Transform()<CR>
+
+" Extract expression (normal mode)
+nmap <silent><Leader>ge :call phpactor#ExtractExpression(v:false)<CR>
+
+" Extract expression from selection
+vmap <silent><Leader>ge :<C-U>call phpactor#ExtractExpression(v:true)<CR>
+
+" Extract method from selection
+vmap <silent><Leader>gm :<C-U>call phpactor#ExtractMethod()<CR>
+
+" VIM MOVE
+if has('macunix')
+  nnoremap Ï :m .+1<CR>==
+  nnoremap È :m .-2<CR>==
+
+  inoremap Ï <Esc>:m .+1<CR>==gi
+  inoremap È <Esc>:m .-2<CR>==gi
+
+  vnoremap Ï :m '>+1<CR>gv=gv
+  vnoremap È :m '<-2<CR>gv=gv
+endif
+
+
+" PDV
+let g:phpacc_template_dir = "$HOME/.vim/plugged/php-accessors.vim/templates"
+
+" AUTO CLOSE
+inoremap (; ();<C-c>O
+inoremap (, (<CR>),<C-c>O
+inoremap {; {<CR>};<C-c>O
+inoremap {, {<CR>},<C-c>O
+inoremap [; [<CR>];<C-c>O
+inoremap [, [<CR>],<C-c>O
+" 

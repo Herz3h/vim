@@ -2,7 +2,7 @@
     "languageserver": {
         "intelephense": {
             "command": "node",
-            "args": ["/usr/local/lib/node_modules/intelephense/lib/intelephense.js", "--stdio"],
+            "args": ["/usr/local/bin/intelephense", "--stdio"],
             "filetypes": ["php"]
         },
         "solargraph": {
@@ -14,5 +14,8 @@
     "python":
     {
         "jediEnabled": false
+    },
+    "intelephense": {
+        "licenceKey": "00YYJ8X6S3MHA3L"
     }
 }
