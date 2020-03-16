@@ -11,6 +11,7 @@
             "filetypes": ["ruby"]
         }
     },
+    "vetur.dev.vlsPath": "/Users/jpldev/.config/yarn/global/node_modules/vls",
     "python":
     {
         "jediEnabled": false

@@ -11,23 +11,20 @@ Plug 'tpope/vim-vinegar'
 " Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-sleuth'
+" Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-dispatch'
 Plug 'mattn/emmet-vim'
-" Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'terryma/vim-expand-region'
+" Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
-Plug 'andymass/vim-matchup'
-" Plug 'tmsvg/pear-tree'
+" Plug 'andymass/vim-matchup'
 Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/neomru.vim'
 Plug 'wellle/targets.vim'
-Plug 'tommcdo/vim-exchange'
-Plug 'junegunn/rainbow_parentheses.vim'
+" Plug 'tommcdo/vim-exchange'
+" Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
@@ -37,23 +34,17 @@ Plug 'henrik/vim-indexed-search'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Yggdroot/indentLine'
-" Plug 'lfv89/vim-interestingwords'
 Plug 'mhinz/vim-startify'
 Plug 'majutsushi/tagbar'
 Plug 'joshdick/onedark.vim'
 Plug 'brooth/far.vim'
-" Plug 'TaDaa/vimade'
-" Plug 'ludovicchabant/vim-gutentags'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'benmills/vimux'
 Plug 'whiteinge/diffconflicts'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 Plug 'tobyS/php-accessors.vim'
-" Plug 'francoiscabrol/ranger.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
-
-
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'vim-utils/vim-ruby-fold'
@@ -118,8 +109,8 @@ filetype plugin on
 
 
 " ruby
-set re=1
-let g:ruby_path = "ruby-2.4.1"
+" set re=1
+" let g:ruby_path = "ruby-2.4.1"
 
 
 " Theme
@@ -128,7 +119,7 @@ syntax enable
 colo monokai-chris
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=none ctermbg=57 gui=none guifg=bg guibg=Yellow
-" hi Normal ctermbg=233
+hi Normal ctermbg=233
 
 " Timeout
 set timeout
@@ -462,13 +453,13 @@ if has('nvim')
   vmap <leader>cf  <Plug>(coc-format-selected)
   nmap <leader>cf  <Plug>(coc-format-selected)
 
-  augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  augroup end
+  " augroup mygroup
+  "   autocmd!
+  "   " Setup formatexpr specified filetype(s).
+  "   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  "   " Update signature help on jump placeholder
+  "   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  " augroup end
 
   " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
   vmap <leader>ca  <Plug>(coc-codeaction-selected)
@@ -599,4 +590,10 @@ inoremap {; {<CR>};<C-c>O
 inoremap {, {<CR>},<C-c>O
 inoremap [; [<CR>];<C-c>O
 inoremap [, [<CR>],<C-c>O
-" 
+
+" POLYGLOT
+let g:polyglot_disabled = ["vue"]
+let loaded_matchparen = 1
+
+" set redrawtime=10000
+" set synmaxcol=0
