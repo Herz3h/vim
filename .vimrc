@@ -32,6 +32,7 @@ Plug 'w0rp/ale'
 Plug 'AndrewRadev/switch.vim'
 Plug 'henrik/vim-indexed-search'
 Plug 'SirVer/ultisnips'
+Plug 'algotech/ultisnips-php'
 Plug 'honza/vim-snippets'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
@@ -592,7 +593,7 @@ inoremap [; [<CR>];<C-c>O
 inoremap [, [<CR>],<C-c>O
 
 " POLYGLOT
-let g:polyglot_disabled = ["vue"]
+" let g:polyglot_disabled = ["vue"]
 let loaded_matchparen = 1
 
 " set redrawtime=10000
