@@ -17,16 +17,11 @@ Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
-" Plug 'terryma/vim-expand-region'
 Plug 'junegunn/vim-easy-align'
-" Plug 'andymass/vim-matchup'
 Plug 'easymotion/vim-easymotion'
 Plug 'Shougo/neomru.vim'
 Plug 'wellle/targets.vim'
-" Plug 'tommcdo/vim-exchange'
-" Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 Plug 'w0rp/ale'
 Plug 'AndrewRadev/switch.vim'
@@ -36,8 +31,6 @@ Plug 'algotech/ultisnips-php'
 Plug 'honza/vim-snippets'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
-Plug 'majutsushi/tagbar'
-Plug 'joshdick/onedark.vim'
 Plug 'brooth/far.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'benmills/vimux'
@@ -54,9 +47,9 @@ Plug 'mhinz/vim-grepper'
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'wellle/visual-split.vim'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'tommcdo/vim-fugitive-blame-ext'
-Plug 'ap/vim-buftabline'
 Plug 'simeji/winresizer'
 Plug 'sjl/gundo.vim'
 Plug 'svermeulen/vim-easyclip'
@@ -78,7 +71,7 @@ set smartcase           " ... unless the query has capital letters.
 set number
 set signcolumn=yes
 set guifont=Monaco:h11
-set relativenumber
+" set relativenumber
 
 " Use spaces instead of tabs
 set expandtab
@@ -216,13 +209,15 @@ let g:EasyGrepCommand=1
 let g:EasyGrepRecursive=1
 
 " AIRLINE
-set laststatus=2
-set noshowmode
-let g:airline_theme='badwolf'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tagbar#flags = 'f'
+if match(&runtimepath, 'vim-airline') != -1
+    set laststatus=2
+    set noshowmode
+    let g:airline_theme='badwolf'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'default'
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tagbar#flags = 'f'
+endif
 
 let anyfold_activate=1
 let anyfold_fold_comments=1
@@ -243,6 +238,7 @@ let g:ale_fixers["php"] = ["php_cs_fixer", "trim_whitespace"]
 let g:ale_fixers["javascript"] = ["eslint", "trim_whitespace"]
 let g:ale_fixers["ruby"] = ["trim_whitespace"]
 let g:ale_fix_on_save=1
+nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>af :ALEFix<cr>
 
@@ -387,7 +383,7 @@ if has('persistent_undo')
 endif
 
 " COC.VIM
-if has('nvim')
+if has('nvim') && match(&runtimepath, 'coc.nvim') != -1
   " if hidden is not set, TextEdit might fail.
   set hidden
 
