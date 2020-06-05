@@ -3,8 +3,8 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
-Plug 'flazz/vim-colorschemes'
-Plug 'rafi/awesome-vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
+" Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
@@ -39,6 +39,9 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 Plug 'tobyS/php-accessors.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'rafalbromirski/vim-aurora'
+Plug 'cohama/lexima.vim'
+Plug '907th/vim-auto-save'
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'vim-utils/vim-ruby-fold'
@@ -47,8 +50,6 @@ Plug 'mhinz/vim-grepper'
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'wellle/visual-split.vim'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'simeji/winresizer'
 Plug 'sjl/gundo.vim'
@@ -108,9 +109,10 @@ filetype plugin on
 
 
 " Theme
-" set t_Co=256
 syntax enable
-colo monokai-chris
+set termguicolors
+colo aurora
+set background=dark
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=none ctermbg=57 gui=none guifg=bg guibg=Yellow
 hi Normal ctermbg=233
@@ -207,17 +209,6 @@ endif
 set grepprg=ag
 let g:EasyGrepCommand=1
 let g:EasyGrepRecursive=1
-
-" AIRLINE
-if match(&runtimepath, 'vim-airline') != -1
-    set laststatus=2
-    set noshowmode
-    let g:airline_theme='badwolf'
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#formatter = 'default'
-    let g:airline_powerline_fonts = 1
-    let g:airline#extensions#tagbar#flags = 'f'
-endif
 
 let anyfold_activate=1
 let anyfold_fold_comments=1
@@ -384,6 +375,7 @@ endif
 
 " COC.VIM
 if has('nvim') && match(&runtimepath, 'coc.nvim') != -1
+  " let g:coc_node_path = '/usr/local/Cellar/node/14.4.0/bin/node'
   " if hidden is not set, TextEdit might fail.
   set hidden
 
@@ -594,3 +586,6 @@ let loaded_matchparen = 1
 
 " set redrawtime=10000
 " set synmaxcol=0
+
+" AUTOSAVE
+" let g:auto_save = 1
