@@ -3,15 +3,19 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
-" Plug 'flazz/vim-colorschemes'
-" Plug 'rafi/awesome-vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-vinegar'
-" Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-sleuth'
+Plug 'tyru/caw.vim'
+Plug 'Shougo/context_filetype.vim'
+" Plug 'tpope/vim-endwise'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-dispatch'
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -19,7 +23,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'junegunn/vim-easy-align'
 Plug 'easymotion/vim-easymotion'
-Plug 'Shougo/neomru.vim'
 Plug 'wellle/targets.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
@@ -38,10 +41,16 @@ Plug 'whiteinge/diffconflicts'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 Plug 'tobyS/php-accessors.vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'rafalbromirski/vim-aurora'
-Plug 'cohama/lexima.vim'
+Plug 'nelsyeung/twig.vim'
+" Plug 'Glench/Vim-Jinja2-Syntax'
+" Plug 'rafalbromirski/vim-aurora'
+" Plug 'cohama/lexima.vim'
 Plug '907th/vim-auto-save'
+Plug 'aserebryakov/vim-todo-lists'
+Plug  'brooth/far.vim'
+" Plug 'ap/vim-css-color'
+Plug 'justinmk/vim-dirvish'
+Plug 'tpope/vim-eunuch'
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'vim-utils/vim-ruby-fold'
@@ -53,10 +62,9 @@ Plug 'wellle/visual-split.vim'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'simeji/winresizer'
 Plug 'sjl/gundo.vim'
-Plug 'svermeulen/vim-easyclip'
+Plug 'svermeulen/vim-yoink'
 Plug 'romainl/vim-qf'
 Plug 'docteurklein/php-getter-setter.vim'
-Plug 'vim-scripts/YankRing.vim'
 Plug 'liuchengxu/vim-clap'
 Plug 'wellle/tmux-complete.vim'
 Plug 'adoy/vim-php-refactoring-toolbox'
@@ -98,7 +106,7 @@ set nowritebackup
 set autoread
 set autowrite
 set autowriteall
-set nofoldenable
+set foldenable
 
 filetype plugin on
 
@@ -111,7 +119,7 @@ filetype plugin on
 " Theme
 syntax enable
 set termguicolors
-colo aurora
+colo monokai-chris
 set background=dark
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=none ctermbg=57 gui=none guifg=bg guibg=Yellow
@@ -197,22 +205,15 @@ let $FZF_DEFAULT_COMMAND= 'rg --files --hidden'
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
-" RANGER
-if executable('ranger')
-  " nmap let g:ranger_map_keys = 0
-  " nmap<leader>e :Ranger<CR>
-" else
-  nmap<leader>e :Explore<CR>
-endif
+nmap <leader>e <Plug>(dirvish_up)
+nmap - <Plug>(dirvish_up)
 
 " EASYGREP
 set grepprg=ag
 let g:EasyGrepCommand=1
 let g:EasyGrepRecursive=1
 
-let anyfold_activate=1
-let anyfold_fold_comments=1
-set foldlevel=1
+" set foldlevel=1
 hi Folded term=NONE cterm=NONE
 
 " DISPATCH
@@ -226,11 +227,12 @@ let ale_php_cs_fixer_options = "--rules='{\"braces\": {\"position_after_control_
 let g:ale_virtualtext_cursor=1
 let g:ale_fixers = {}
 let g:ale_fixers["php"] = ["php_cs_fixer", "trim_whitespace"]
-let g:ale_fixers["javascript"] = ["eslint", "trim_whitespace"]
+let g:ale_fixers.javascript = ["eslint", "trim_whitespace"]
 let g:ale_fixers["ruby"] = ["trim_whitespace"]
+let g:ale_fixers["vue"] = ["trim_whitespace"]
 let g:ale_fix_on_save=1
 nmap <silent> <leader>ak :ALEPrevious<cr>
-nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>n :ALENext<cr>
 nmap <silent> <leader>af :ALEFix<cr>
 
 
@@ -324,35 +326,8 @@ nmap <leader>j :cn<CR>
 
 nnoremap <esc> :noh<return><esc>
 
-au BufNewFile,BufRead *.html,*.twig set filetype=jinja
+" au BufNewFile,BufRead *.html,*.twig set filetype=jinja
 
-
-
-" EASYCLIP
-nnoremap gm m
-function! s:yank_list()
-  redir => ys
-  silent Yanks
-  redir END
-  return split(ys, '\n')[1:]
-endfunction
-
-function! s:yank_handler(reg)
-  if empty(a:reg)
-    echo "aborted register paste"
-  else
-    let token = split(a:reg, ' ')
-    execute 'Paste' . token[0]
-  endif
-endfunction
-
-command! FZFYank call fzf#run({
-\ 'source': <sid>yank_list(),
-\ 'sink': function('<sid>yank_handler'),
-\ 'options': '-m',
-\ 'down': 12
-\ })
-let g:EasyClipEnableBlackHoleRedirect = 0
 
 " GUTENTAGS
 " let g:gutentags_cache_dir=$HOME . '/.tags/'
@@ -581,7 +556,8 @@ inoremap [; [<CR>];<C-c>O
 inoremap [, [<CR>],<C-c>O
 
 " POLYGLOT
-" let g:polyglot_disabled = ["vue"]
+let g:polyglot_disabled = []
+let g:vue_pre_processors = ['less']
 let loaded_matchparen = 1
 
 " set redrawtime=10000
@@ -589,3 +565,6 @@ let loaded_matchparen = 1
 
 " AUTOSAVE
 " let g:auto_save = 1
+
+" YOINK
+nmap <c-p> <plug>(YoinkPostPasteSwapBack)
