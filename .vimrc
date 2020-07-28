@@ -12,7 +12,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tyru/caw.vim'
+Plug 'tpope/vim-commentary'
 Plug 'Shougo/context_filetype.vim'
 " Plug 'tpope/vim-endwise'
 " Plug 'jiangmiao/auto-pairs'
@@ -51,12 +51,13 @@ Plug  'brooth/far.vim'
 " Plug 'ap/vim-css-color'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-eunuch'
-
+Plug 'xolox/vim-colorscheme-switcher'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mhinz/vim-grepper'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'xolox/vim-misc'
 
 Plug 'wellle/visual-split.vim'
 Plug 'tommcdo/vim-fugitive-blame-ext'
@@ -111,6 +112,7 @@ set foldenable
 filetype plugin on
 
 
+set regexpengine=1
 " ruby
 " set re=1
 " let g:ruby_path = "ruby-2.4.1"
@@ -119,11 +121,12 @@ filetype plugin on
 " Theme
 syntax enable
 set termguicolors
-colo monokai-chris
-set background=dark
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=none ctermbg=57 gui=none guifg=bg guibg=Yellow
-hi Normal ctermbg=233
+colo lucius
+" colo monokai-chris
+" set background=dark
+" highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
+" highlight DiffText   cterm=bold ctermfg=none ctermbg=57 gui=none guifg=bg guibg=Yellow
+" hi Normal ctermbg=233
 
 " Timeout
 set timeout
@@ -338,15 +341,12 @@ nnoremap <esc> :noh<return><esc>
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
 
-" Keep undo history across sessions by storing it in a file
-if has('persistent_undo')
-  let myUndoDir = expand(vimDir . '/undodir')
-  " Create dirs
-  call system('mkdir ' . vimDir)
-  call system('mkdir ' . myUndoDir)
-  let &undodir = myUndoDir
-  set undofile
-endif
+let myUndoDir = expand(vimDir . '/undodir')
+" Create dirs
+call system('mkdir ' . vimDir)
+call system('mkdir ' . myUndoDir)
+let &undodir = myUndoDir
+set undofile
 
 " COC.VIM
 if has('nvim') && match(&runtimepath, 'coc.nvim') != -1
@@ -568,3 +568,14 @@ let loaded_matchparen = 1
 
 " YOINK
 nmap <c-p> <plug>(YoinkPostPasteSwapBack)
+
+" autocmd VimEnter * RandomColorScheme
+
+" PHP.vim
+let php_html_in_heredoc = 0
+let php_html_in_nowdoc = 0
+let php_html_load = 0
+let php_sql_query = 0
+let php_sql_heredoc = 0
+let php_sql_nowdoc = 0
+let php_ignore_doc = 1
