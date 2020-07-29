@@ -2,74 +2,94 @@ let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 call plug#begin('~/.vim/plugged')
+
+" THEMES
 Plug 'chriskempson/base16-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'rafalbromirski/vim-aurora'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'xolox/vim-misc'
+
+" TPOPE
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-Plug 'Shougo/context_filetype.vim'
-" Plug 'tpope/vim-endwise'
-" Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-dispatch'
-Plug 'mattn/emmet-vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-eunuch'
+
+" NAVIGATION
 Plug 'easymotion/vim-easymotion'
-Plug 'wellle/targets.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'sheerun/vim-polyglot'
-Plug 'w0rp/ale'
-Plug 'AndrewRadev/switch.vim'
-Plug 'henrik/vim-indexed-search'
+
+" AUTOCOMPLETE
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'wellle/tmux-complete.vim'
 Plug 'SirVer/ultisnips'
 Plug 'algotech/ultisnips-php'
 Plug 'honza/vim-snippets'
-Plug 'Yggdroot/indentLine'
-Plug 'mhinz/vim-startify'
-Plug 'brooth/far.vim'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'benmills/vimux'
-Plug 'whiteinge/diffconflicts'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
-Plug 'tobyS/php-accessors.vim'
-Plug 'nelsyeung/twig.vim'
-" Plug 'Glench/Vim-Jinja2-Syntax'
-" Plug 'rafalbromirski/vim-aurora'
-" Plug 'cohama/lexima.vim'
-Plug '907th/vim-auto-save'
-Plug 'aserebryakov/vim-todo-lists'
-Plug  'brooth/far.vim'
-" Plug 'ap/vim-css-color'
-Plug 'justinmk/vim-dirvish'
-Plug 'tpope/vim-eunuch'
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'vim-utils/vim-ruby-fold'
-Plug 'vim-ruby/vim-ruby'
-Plug 'mhinz/vim-grepper'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'xolox/vim-misc'
 
-Plug 'wellle/visual-split.vim'
+
+" FILES
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-dirvish'
+
+" GIT
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fugitive-blame-ext'
+Plug 'whiteinge/diffconflicts'
+
+" LINT
+Plug 'w0rp/ale'
+
+" FORMAT
+Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/vim-easy-align'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'Yggdroot/indentLine'
+
+" MOTIONS
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'wellle/targets.vim'
+Plug 'machakann/vim-sandwich'
+
+" SEARCH
+Plug 'henrik/vim-indexed-search'
+Plug 'mhinz/vim-grepper'
+Plug 'brooth/far.vim'
+
+" MISC
+Plug 'romainl/vim-qf'
 Plug 'simeji/winresizer'
 Plug 'sjl/gundo.vim'
+Plug 'Shougo/context_filetype.vim'
+Plug 'AndrewRadev/switch.vim'
+Plug 'mhinz/vim-startify'
+Plug 'benmills/vimux'
+Plug '907th/vim-auto-save'
+Plug 'aserebryakov/vim-todo-lists'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'svermeulen/vim-yoink'
-Plug 'romainl/vim-qf'
+
+" PHP
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
+Plug 'tobyS/php-accessors.vim'
 Plug 'docteurklein/php-getter-setter.vim'
-Plug 'liuchengxu/vim-clap'
-Plug 'wellle/tmux-complete.vim'
 Plug 'adoy/vim-php-refactoring-toolbox'
-Plug 'machakann/vim-sandwich'
+
+" HTML
+Plug 'mattn/emmet-vim'
+
+" TWIG
+Plug 'nelsyeung/twig.vim'
+
+" RUBY
+Plug 'vim-utils/vim-ruby-fold'
+Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
 
@@ -121,7 +141,7 @@ set regexpengine=1
 " Theme
 syntax enable
 set termguicolors
-colo lucius
+colo oceanblack
 " colo monokai-chris
 " set background=dark
 " highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
@@ -179,6 +199,7 @@ nnoremap <silent> <leader>y :FZFYank<CR>
 nnoremap <silent> <leader>h :History<CR>
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%CR"'
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -202,6 +223,23 @@ let $FZF_DEFAULT_COMMAND= 'rg --files --hidden'
 "             \   <bang>0 ? fzf#vim#with_preview('up:60%')
 "             \           : fzf#vim#with_preview('right:50%:hidden', '?'),
 "             \   <bang>0)
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+  let height = float2nr(10)
+  let width = float2nr(80)
+  let horizontal = float2nr((&columns - width) / 2)
+  let vertical = 1
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+        \ }
+  call nvim_open_win(buf, v:true, opts)
+endfunction
 
 
 "  YANKSTACK
