@@ -5,7 +5,13 @@ snippet af "() => {}"
 }
 endsnippet
 
-snippet fun "function() => {}"
+snippet f "function"
+${1:function_name}(${2})
+{
+	${0:${VISUAL}}
+}
+endsnippet
+snippet af "function() => {}"
 function($1)
 {
 	$2

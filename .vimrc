@@ -1,7 +1,9 @@
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
+let g:polyglot_disabled = ['typescript']
 
 call plug#begin('~/.vim/plugged')
+
 
 " THEMES
 Plug 'chriskempson/base16-vim'
@@ -11,21 +13,22 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'rafalbromirski/vim-aurora'
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
+Plug 'chuling/ci_dark'
 
 " TPOPE
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-vinegar'
 
 " NAVIGATION
 Plug 'easymotion/vim-easymotion'
 
 " AUTOCOMPLETE
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/tmux-complete.vim'
 Plug 'SirVer/ultisnips'
 Plug 'algotech/ultisnips-php'
@@ -35,7 +38,8 @@ Plug 'honza/vim-snippets'
 " FILES
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
+
 
 " GIT
 Plug 'airblade/vim-gitgutter'
@@ -48,6 +52,8 @@ Plug 'w0rp/ale'
 
 " FORMAT
 Plug 'sheerun/vim-polyglot'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'junegunn/vim-easy-align'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Yggdroot/indentLine'
@@ -56,11 +62,13 @@ Plug 'Yggdroot/indentLine'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'wellle/targets.vim'
 Plug 'machakann/vim-sandwich'
+Plug 'tyru/caw.vim'
+Plug 'kana/vim-operator-user'
 
 " SEARCH
 Plug 'henrik/vim-indexed-search'
 Plug 'mhinz/vim-grepper'
-Plug 'brooth/far.vim'
+Plug 'dkprice/vim-easygrep'
 
 " MISC
 Plug 'romainl/vim-qf'
@@ -74,12 +82,16 @@ Plug '907th/vim-auto-save'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'svermeulen/vim-yoink'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'andymass/vim-matchup'
+
 
 " PHP
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 Plug 'tobyS/php-accessors.vim'
 Plug 'docteurklein/php-getter-setter.vim'
 Plug 'adoy/vim-php-refactoring-toolbox'
+Plug 'tobyS/pdv'
 
 " HTML
 Plug 'mattn/emmet-vim'
@@ -128,6 +140,7 @@ set autoread
 set autowrite
 set autowriteall
 set foldenable
+set lazyredraw
 
 filetype plugin on
 
@@ -141,7 +154,7 @@ set regexpengine=1
 " Theme
 syntax enable
 set termguicolors
-colo oceanblack
+colo ci_dark
 " colo monokai-chris
 " set background=dark
 " highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
@@ -179,7 +192,7 @@ nmap ga <Plug>(EasyAlign)
 let g:ruby_fold_lines_limit = 200
 
 " Profiling bindings
-nnoremap <silent> <leader>DD :exe ":profile start profile.log"<CR>:exe ":profile func *"<CR>:exe ":profile file *"<CR>
+nnoremap <silent> <leader>DD :exe ":profile start profile.log"<CR>:exe ":profile func *"<CR>:exe ":profile file *"<CR>:echo "Profiling started"<CR>
 nnoremap <silent> <leader>DP :exe ":profile pause"<CR>
 nnoremap <silent> <leader>DC :exe ":profile continue"<CR>
 nnoremap <silent> <leader>DQ :exe ":profile pause"<CR>:noautocmd qall!<CR>
@@ -227,7 +240,7 @@ function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)
   call setbufvar(buf, '&signcolumn', 'no')
   let height = float2nr(10)
-  let width = float2nr(80)
+  let width = float2nr(140)
   let horizontal = float2nr((&columns - width) / 2)
   let vertical = 1
   let opts = {
@@ -246,8 +259,7 @@ endfunction
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
 
-nmap <leader>e <Plug>(dirvish_up)
-nmap - <Plug>(dirvish_up)
+
 
 " EASYGREP
 set grepprg=ag
@@ -271,6 +283,8 @@ let g:ale_fixers["php"] = ["php_cs_fixer", "trim_whitespace"]
 let g:ale_fixers.javascript = ["eslint", "trim_whitespace"]
 let g:ale_fixers["ruby"] = ["trim_whitespace"]
 let g:ale_fixers["vue"] = ["trim_whitespace"]
+let g:ale_fixers["yaml"] = ["trim_whitespace"]
+let g:ale_fixers["twig"] = ["trim_whitespace"]
 let g:ale_fix_on_save=1
 nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <leader>n :ALENext<cr>
@@ -464,19 +478,18 @@ if has('nvim') && match(&runtimepath, 'coc.nvim') != -1
   " augroup end
 
   " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-  vmap <leader>ca  <Plug>(coc-codeaction-selected)
-  nmap <leader>ca  <Plug>(coc-codeaction-selected)
+  vmap <leader>a  <Plug>(coc-codeaction-selected)
+  nmap <leader>a  <Plug>(coc-codeaction-selected)
 
   " Remap for do codeAction of current line
-  nmap <leader>cac  <Plug>(coc-codeaction)
+  nmap <leader>ac  <Plug>(coc-codeaction)
   " Fix autofix problem of current line
-  nmap <leader>cqf  <Plug>(coc-fix-current)
+  nmap <leader>qf  <Plug>(coc-fix-current)
 
-  " Use `:Format` for format current buffer
   command! -nargs=0 Format :call CocAction('format')
-
-  " Use `:Fold` for fold current buffer
   command! -nargs=? Fold :call CocAction('fold', <f-args>)
+  command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
 
 
   " Add diagnostic info for https://github.com/itchyny/lightline.vim
@@ -506,12 +519,7 @@ if has('nvim') && match(&runtimepath, 'coc.nvim') != -1
   nnoremap <silent> <space>ck  :<C-u>CocPrev<CR>
   " Resume latest coc list
   nnoremap <silent> <space>cp  :<C-u>CocListResume<CR>
-
-
 endif
-
-" YANKRING
-nnoremap <leader>p :YRShow<CR>
 
 " VIMUX
 nmap <leader>t :VimuxRunLastCommand<CR>
@@ -567,7 +575,7 @@ nmap <silent><Leader>ge :call phpactor#ExtractExpression(v:false)<CR>
 vmap <silent><Leader>ge :<C-U>call phpactor#ExtractExpression(v:true)<CR>
 
 " Extract method from selection
-vmap <silent><Leader>gm :<C-U>call phpactor#ExtractMethod()<CR>
+" vmap <silent><Leader>gm :<C-U>call phpactor#ExtractMethod()<CR>
 
 " VIM MOVE
 if has('macunix')
@@ -594,9 +602,8 @@ inoremap [; [<CR>];<C-c>O
 inoremap [, [<CR>],<C-c>O
 
 " POLYGLOT
-let g:polyglot_disabled = []
 let g:vue_pre_processors = ['less']
-let loaded_matchparen = 1
+let loaded_matchparen = 0
 
 " set redrawtime=10000
 " set synmaxcol=0
@@ -617,3 +624,45 @@ let php_sql_query = 0
 let php_sql_heredoc = 0
 let php_sql_nowdoc = 0
 let php_ignore_doc = 1
+
+" EASYGREP
+let g:EasyGrepCommand='rg'
+" au FileType typescript setlocal syntax=OFF
+
+
+" VINEGAR
+nmap <leader>e :Explore<CR>
+
+highlight Pmenu ctermbg=black guibg=black
+
+" CAW.VIM
+" let g:caw_operator_keymappings = 1
+" nmap gc <Plug>(caw:hatpos:toggle:operator)
+" nmap gcc <Plug>(caw:hatpos:toggle:operator)
+
+" PHPDOCUMENTOR
+nnoremap <leader>pd :call pdv#DocumentCurrentLine()<CR>
+let g:easy_align_delimiters = {
+\ '>': { 'pattern': '>>\|=>\|>' },
+\ '/': {
+\     'pattern':         '//\+\|/\*\|\*/',
+\     'delimiter_align': 'l',
+\     'ignore_groups':   ['!Comment'] },
+\ ']': {
+\     'pattern':       '[[\]]',
+\     'left_margin':   0,
+\     'right_margin':  0,
+\     'stick_to_left': 0
+\   },
+\ ')': {
+\     'pattern':       '[()]',
+\     'left_margin':   0,
+\     'right_margin':  0,
+\     'stick_to_left': 0
+\   },
+\ 'd': {
+\     'pattern':      ' \(\S\+\s*[;=]\)\@=',
+\     'left_margin':  0,
+\     'right_margin': 0
+\   }
+\ }

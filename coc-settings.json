@@ -17,6 +17,19 @@
         "jediEnabled": false
     },
     "intelephense": {
-        "licenceKey": "00YYJ8X6S3MHA3L"
+        "licenceKey": "00YYJ8X6S3MHA3L",
+        "environment": {
+            "phpVersion": "7.4"
+        },
+        "format": {
+            "braces": "allman"
+        }
+    },
+    "phpactor": {
+        "language_server_code_transform":{
+            "import_globals": true
+        }
+
     }
+
 }
