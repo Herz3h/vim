@@ -1,6 +1,9 @@
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
-let g:polyglot_disabled = ['typescript']
+" let g:polyglot_disabled = ['typescript']
+if has('macunix')
+    let g:python3_host_prog = '/usr/local/opt/python@3.8/bin/python3'
+endif
 
 call plug#begin('~/.vim/plugged')
 
@@ -14,6 +17,10 @@ Plug 'rafalbromirski/vim-aurora'
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
 Plug 'chuling/ci_dark'
+
+" UI
+Plug 'nvim-lua/lsp-status.nvim'
+Plug 'liuchengxu/eleline.vim'
 
 " TPOPE
 Plug 'tpope/vim-abolish'
@@ -42,7 +49,7 @@ Plug 'junegunn/fzf.vim'
 
 
 " GIT
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'whiteinge/diffconflicts'
@@ -69,6 +76,7 @@ Plug 'kana/vim-operator-user'
 Plug 'henrik/vim-indexed-search'
 Plug 'mhinz/vim-grepper'
 Plug 'dkprice/vim-easygrep'
+Plug 'wincent/ferret'
 
 " MISC
 Plug 'romainl/vim-qf'
@@ -83,7 +91,9 @@ Plug 'aserebryakov/vim-todo-lists'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'svermeulen/vim-yoink'
 Plug 'jiangmiao/auto-pairs'
+Plug 'AndrewRadev/linediff.vim'
 " Plug 'andymass/vim-matchup'
+Plug 'mbbill/undotree'
 
 
 " PHP
@@ -125,8 +135,8 @@ set splitbelow
 set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 " autoread and autowrite
 augroup save
   au!
@@ -144,6 +154,9 @@ set lazyredraw
 
 filetype plugin on
 
+set isk+= 
+iabbrev {  { 
+
 
 set regexpengine=1
 " ruby
@@ -154,7 +167,7 @@ set regexpengine=1
 " Theme
 syntax enable
 set termguicolors
-colo ci_dark
+colorscheme wombat
 " colo monokai-chris
 " set background=dark
 " highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
@@ -165,6 +178,8 @@ colo ci_dark
 set timeout
 set ttimeout
 set timeoutlen=500
+
+
 
 " Mappings
 let mapleader="\<Space>"
@@ -177,6 +192,8 @@ map <C-l> <C-W>l
 map <leader>w :w!<CR>
 map <leader>ve :e ~/.vimrc<CR>
 map <leader>vr :so ~/.vimrc<CR>
+nnoremap <leader>p "0p
+nnoremap <leader>P "0P
 
 " Search and Replace
 nmap <leader>s :%s//g<Left><Left>
@@ -279,10 +296,11 @@ let ale_php_cs_fixer_executable = "./vendor/friendsofphp/php-cs-fixer/php-cs-fix
 let ale_php_cs_fixer_options = "--rules='{\"braces\": {\"position_after_control_structures\": \"next\", \"position_after_functions_and_oop_constructs\": \"next\", \"position_after_anonymous_constructs\": \"next\"} }'"
 let g:ale_virtualtext_cursor=1
 let g:ale_fixers = {}
+let g:ale_fixers["md"] = ["trim_whitespace"]
 let g:ale_fixers["php"] = ["php_cs_fixer", "trim_whitespace"]
 let g:ale_fixers.javascript = ["eslint", "trim_whitespace"]
 let g:ale_fixers["ruby"] = ["trim_whitespace"]
-let g:ale_fixers["vue"] = ["trim_whitespace"]
+let g:ale_fixers["vue"] = ["eslint", "trim_whitespace"]
 let g:ale_fixers["yaml"] = ["trim_whitespace"]
 let g:ale_fixers["twig"] = ["trim_whitespace"]
 let g:ale_fix_on_save=1
@@ -302,7 +320,7 @@ let g:switch_custom_definitions =
 " nmap <silent> dsB diB"_dkP`[<`]
 
 " FUGITIVE
-nmap <leader>gs :vertical Gstatus<CR>
+nmap <leader>gs :vertical Git<CR>
 nmap <leader>gd :Gvdiffsplit!<CR>
 nmap <leader>gh :GitGutterStageHunk<CR>
 nmap <leader>gb :Gblame<CR>
@@ -320,7 +338,7 @@ set diffopt+=vertical
 let g:gundo_prefer_python3 = 1
 
 " GREPPER
-nmap <leader>g :Grepper<CR>
+nmap <leader>g <Plug>(FerretAck)
 nmap gf <plug>(GrepperOperator)
 xmap gf <plug>(GrepperOperator)
 runtime plugin/grepper.vim

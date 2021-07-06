@@ -30,6 +30,6 @@
             "import_globals": true
         }
 
-    }
-
+    },
+    "coc.preferences.currentFunctionSymbolAutoUpdate": true
 }
