@@ -30,6 +30,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-commentary'
 
 " NAVIGATION
 Plug 'easymotion/vim-easymotion'
@@ -69,14 +70,13 @@ Plug 'Yggdroot/indentLine'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'wellle/targets.vim'
 Plug 'machakann/vim-sandwich'
-Plug 'tyru/caw.vim'
 Plug 'kana/vim-operator-user'
 
 " SEARCH
 Plug 'henrik/vim-indexed-search'
 Plug 'mhinz/vim-grepper'
 Plug 'dkprice/vim-easygrep'
-Plug 'wincent/ferret'
+Plug 'mhinz/vim-grepper'
 
 " MISC
 Plug 'romainl/vim-qf'
@@ -94,6 +94,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'AndrewRadev/linediff.vim'
 " Plug 'andymass/vim-matchup'
 Plug 'mbbill/undotree'
+
 
 
 " PHP
@@ -167,7 +168,7 @@ set regexpengine=1
 " Theme
 syntax enable
 set termguicolors
-colorscheme wombat
+colorscheme badwolf
 " colo monokai-chris
 " set background=dark
 " highlight DiffChange cterm=bold ctermfg=10 ctermbg=19 gui=none guifg=bg guibg=Red
@@ -320,10 +321,10 @@ let g:switch_custom_definitions =
 " nmap <silent> dsB diB"_dkP`[<`]
 
 " FUGITIVE
-nmap <leader>gs :vertical Git<CR>
-nmap <leader>gd :Gvdiffsplit!<CR>
+nmap <leader>gs :Git<CR>
+nmap <leader>gd :Gdiffsplit!<CR>
 nmap <leader>gh :GitGutterStageHunk<CR>
-nmap <leader>gb :Gblame<CR>
+nmap <leader>gb :Git blame<CR>
 nmap <leader>gw :Gwrite<CR>
 " " https://github.com/tpope/vim-fugitive#faq
 " " patch that automatically opens the quickfix window after :Ggrep
@@ -334,11 +335,9 @@ nnoremap <leader>gl :silent! Glog<CR> :redraw!<CR>
 set diffopt+=vertical
 
 
-" GUNDO
-let g:gundo_prefer_python3 = 1
 
 " GREPPER
-nmap <leader>g <Plug>(FerretAck)
+nnoremap <leader>g :Grepper<cr>
 nmap gf <plug>(GrepperOperator)
 xmap gf <plug>(GrepperOperator)
 runtime plugin/grepper.vim
@@ -405,7 +404,6 @@ nnoremap <esc> :noh<return><esc>
 " GUTENTAGS
 " let g:gutentags_cache_dir=$HOME . '/.tags/'
 
-
 " GUNDO
 " Put plugins and dictionaries in this dir (also on Windows)
 let vimDir = '$HOME/.vim'
@@ -416,11 +414,12 @@ let myUndoDir = expand(vimDir . '/undodir')
 call system('mkdir ' . vimDir)
 call system('mkdir ' . myUndoDir)
 let &undodir = myUndoDir
+
 set undofile
 
 " COC.VIM
 if has('nvim') && match(&runtimepath, 'coc.nvim') != -1
-  " let g:coc_node_path = '/usr/local/Cellar/node/14.4.0/bin/node'
+  let g:coc_node_path = '/Users/jpldev/.nvm/versions/node/v12.18.3/bin/node'
   " if hidden is not set, TextEdit might fail.
   set hidden
 
@@ -684,3 +683,6 @@ let g:easy_align_delimiters = {
 \     'right_margin': 0
 \   }
 \ }
+
+" AUTOPAIRS
+let g:AutoPairsMultilineClose = 0

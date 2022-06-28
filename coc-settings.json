@@ -1,35 +1,13 @@
 {
-    "languageserver": {
-        "intelephense": {
-            "command": "node",
-            "args": ["/usr/local/bin/intelephense", "--stdio"],
-            "filetypes": ["php"]
-        },
-        "solargraph": {
-            "command": "solargraph",
-            "args": ["stdio"],
-            "filetypes": ["ruby"]
-        }
-    },
-    "vetur.dev.vlsPath": "/Users/jpldev/.config/yarn/global/node_modules/vls",
-    "python":
-    {
+    "vetur.dev.vlsPath": "/Users/jpldev/.config/yarn/global/node_modules/vls/",
+    "vetur.trace.server": "verbose",
+    "vetur.experimental.templateInterpolationService": false,
+    "vetur.dev.vlsPort": 9229,
+    "vetur.trace.server": "verbose",
+    "tsserver.npm": "/Users/jpldev/.nvm/versions/node/v12.18.3/bin/npm",
+    "python": {
         "jediEnabled": false
     },
-    "intelephense": {
-        "licenceKey": "00YYJ8X6S3MHA3L",
-        "environment": {
-            "phpVersion": "7.4"
-        },
-        "format": {
-            "braces": "allman"
-        }
-    },
-    "phpactor": {
-        "language_server_code_transform":{
-            "import_globals": true
-        }
-
-    },
-    "coc.preferences.currentFunctionSymbolAutoUpdate": true
+    "intelephense.licenseKey": "00YYJ8X6S3MHA3L",
+    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
 }
